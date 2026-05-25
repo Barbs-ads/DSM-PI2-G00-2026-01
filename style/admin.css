@@ -1,0 +1,95 @@
+.cards-admin {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: var(--sp-4);
+  margin-top: var(--sp-5);
+}
+
+.card-admin {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-5);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(239,84,133,.12);
+  color: var(--postal);
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+}
+.card-admin strong {
+  display: block;
+  font-size: 1.6rem;
+}
+
+.card-admin span {
+  color: var(--muted);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: var(--sp-5);
+}
+
+.tabela-admin {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.tabela-admin th,
+.tabela-admin td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.tabela-admin th {
+  background: rgba(239,84,133,.08);
+  color: var(--postal-dark);
+}
+
+.btn-icon {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(239,84,133,.12);
+  color: var(--postal);
+  cursor: pointer;
+}
+
+.btn-icon.danger {
+  background: rgba(255,0,0,.08);
+  color: #c62828;
+}
+
+.status {
+  padding: .45rem .8rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.status.aprovado {
+  background: rgba(56,142,60,.14);
+  color: #2e7d32;
+}
+.status.pendente {
+  background: rgba(255,160,0,.14);
+  color: #ef6c00;
+}
+
+.status.reservado {
+  background: rgba(25,118,210,.14);
+  color: #1565c0;
+}

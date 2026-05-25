@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Mural de cartinhas: histórias escritas por crianças reais em Franca/SP. Adote uma cartinha, envie a sua ou doe diretamente." />
+  <meta property="og:title" content="Mural de Cartinhas — Conectando Sonhos" />
+  <meta property="og:description" content="Cada carta aqui é um sonho real. Escolha uma e transforme uma vida." />
+  <title>Mural de Cartinhas | Conectando Sonhos</title>
+  <link rel="shortcut icon" href="./logotipo/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="./style/design-system.css" />
+  <link rel="stylesheet" href="./style/cartas.css" />
+</head>
+
+<body>
+
+  <div data-partial="header"></div>
+
+  <main id="conteudo">
+
+    <!-- ── HERO INTERNO ────────────────────────────────────────── -->
+    <section class="ph-hero" aria-label="Apresentação do mural">
+      <div class="phh-bg" aria-hidden="true">
+        <img src="./fundo/fundo-carta-generico5.jpg" alt="" loading="eager" />
+        <div class="phh-manto"></div>
+      </div>
+      <div class="container phh-inner">
+        <span class="tag tag-branco entra">
+          <i class="bi bi-envelope-heart-fill" aria-hidden="true"></i> Mural de Sonhos
+        </span>
+        <h1 class="phh-titulo entra d1">
+          Cada carta aqui<br /><em>é um sonho real</em>
+        </h1>
+        <p class="phh-desc entra d2">
+          Histórias escritas por crianças de verdade. Escolha uma, adote o pedido
+          e transforme uma vida com um gesto simples.
+        </p>
+        <div class="phh-stats entra d3" role="list" aria-label="Estatísticas rápidas">
+          <div class="phs-item" role="listitem">
+            <span id="ph-disp" aria-label="Cartinhas disponíveis">…</span>
+            <small>disponíveis agora</small>
+          </div>
+          <span class="phs-sep" aria-hidden="true">·</span>
+          <div class="phs-item" role="listitem">
+            <span>5</span>
+            <small>pontos de coleta</small>
+          </div>
+          <span class="phs-sep" aria-hidden="true">·</span>
+          <div class="phs-item" role="listitem">
+            <span>100%</span>
+            <small>transparente</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ABAS DE AÇÃO ────────────────────────────────────────── -->
+    <section class="secao cartas-secao" aria-label="Ações disponíveis">
+      <div class="container">
+
+        <div class="tabs" role="tablist" aria-label="Selecione uma ação">
+          <button class="tab ativo" data-tab="adotar" role="tab" aria-selected="true" aria-controls="tp-adotar"
+            id="tab-adotar">
+            <i class="bi bi-heart-fill" aria-hidden="true"></i> Adotar Cartinha
+          </button>
+          <button class="tab" data-tab="enviar" role="tab" aria-selected="false" aria-controls="tp-enviar"
+            id="tab-enviar">
+            <i class="bi bi-pencil-fill" aria-hidden="true"></i> Enviar Cartinha
+          </button>
+          <button class="tab" data-tab="doar" role="tab" aria-selected="false" aria-controls="tp-doar" id="tab-doar">
+            <i class="bi bi-gift-fill" aria-hidden="true"></i> Doe Diretamente
+          </button>
+        </div>
+
+        <!-- ═══ TAB · ADOTAR ═══════════════════════════════════ -->
+        <div class="tab-painel ativo" id="tp-adotar" role="tabpanel" aria-labelledby="tab-adotar">
+
+          <div class="filtros-bar">
+            <div class="fb-busca">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <input type="search" id="inp-busca" class="fb-inp" placeholder="Buscar por nome, presente, história…"
+                aria-label="Buscar cartinhas" />
+            </div>
+            <select id="f-pres" class="campo-select" aria-label="Filtrar por presente" style="max-width:200px">
+              <option value="">Todos os presentes</option>
+              <option value="bonecas">Bonecas</option>
+              <option value="veiculos">Carrinhos</option>
+              <option value="pelucia">Pelúcia</option>
+              <option value="jogos">Jogos</option>
+              <option value="bicicleta">Bicicleta</option>
+              <option value="kit-escolar">Kit Escolar</option>
+              <option value="bolas">Esportes</option>
+              <option value="arte">Arte</option>
+              <option value="livros">Livros</option>
+              <option value="tenis">Tênis/Roupas</option>
+            </select>
+            <select id="f-status" class="campo-select" aria-label="Filtrar por status" style="max-width:170px">
+              <option value="disponivel">Disponíveis</option>
+              <option value="">Todas</option>
+              <option value="adotada">Adotadas</option>
+              <option value="entregue">Entregues</option>
+            </select>
+            <span class="f-count" id="f-count" aria-live="polite">Carregando…</span>
+          </div>
+
+          <div class="mural" id="mural" aria-live="polite" aria-label="Lista de cartinhas">
+            <div class="mural-load">
+              <div class="spinner" style="color:var(--postal);width:36px;height:36px;border-width:3px"
+                aria-hidden="true"></div>
+              <p>Carregando cartinhas…</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ TAB · ENVIAR ═══════════════════════════════════ -->
+        <div class="tab-painel" id="tp-enviar" role="tabpanel" aria-labelledby="tab-enviar">
+          <div class="form-layout">
+
+            <aside class="form-aside">
+              <img src="./imagens_sobre/rena34.png" alt="" class="form-mascote" loading="lazy" />
+              <div class="aside-balao">
+                <p><strong>Atenção!</strong> Apenas instituições parceiras podem enviar cartinhas para o mural público.
+                </p>
+                <p class="ab-sub">Faça login com conta de instituição para cadastrar.</p>
+                <a href="login.html" class="btn btn-primario btn-p" style="margin-top:var(--sp-2)">
+                  Fazer login
+                </a>
+              </div>
+            </aside>
+
+            <div class="form-bloco">
+              <div class="fb-header">
+                <h2>Cadastrar cartinha</h2>
+                <p>Preencha os dados da criança. A cartinha passará por análise antes de aparecer no mural público.</p>
+              </div>
+
+              <form id="form-carta" novalidate>
+                <div class="grid-campos g2">
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="nc-nome">Nome da criança <span class="obg"
+                        aria-label="obrigatório">*</span></label>
+                    <input type="text" id="nc-nome" class="campo-input" placeholder="Ex: Ana Luiza" required />
+                  </div>
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="nc-nasc">Data de nascimento <span class="obg"
+                        aria-label="obrigatório">*</span></label>
+                    <input type="date" id="nc-nasc" class="campo-input" required />
+                  </div>
+                </div>
+
+                <div class="campo-wrap">
+                  <label class="campo-label" for="nc-pres">Presente desejado <span class="obg"
+                      aria-label="obrigatório">*</span></label>
+                  <select id="nc-pres" class="campo-select" required>
+                    <option value="">Selecione</option>
+                    <optgroup label="Brinquedos">
+                      <option value="bonecas">Bonecas e Acessórios</option>
+                      <option value="veiculos">Carrinhos e Veículos</option>
+                      <option value="herois">Bonecos de Heróis</option>
+                      <option value="pelucia">Bichinho de Pelúcia</option>
+                      <option value="jogos">Jogos e Quebra-Cabeças</option>
+                      <option value="educativos">Brinquedos Educativos</option>
+                    </optgroup>
+                    <optgroup label="Esportes">
+                      <option value="bolas">Bola Esportiva</option>
+                      <option value="rodas">Skate / Patins</option>
+                      <option value="bicicleta">Bicicleta</option>
+                    </optgroup>
+                    <optgroup label="Escola">
+                      <option value="kit-escolar">Kit Escolar Completo</option>
+                      <option value="mochila">Mochila ou Estojo</option>
+                      <option value="livros">Livros e Gibis</option>
+                      <option value="arte">Kit de Pintura e Arte</option>
+                    </optgroup>
+                    <optgroup label="Roupas">
+                      <option value="roupa">Roupas</option>
+                      <option value="tenis">Tênis</option>
+                      <option value="sandalia">Sandália</option>
+                    </optgroup>
+                    <optgroup label="Outros">
+                      <option value="higiene">Kit de Higiene</option>
+                      <option value="tecnologia">Eletrônico</option>
+                      <option value="outro">Outro</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <div class="campo-wrap">
+                  <label class="campo-label" for="nc-texto">Texto da cartinha <span class="obg"
+                      aria-label="obrigatório">*</span></label>
+                  <textarea id="nc-texto" class="campo-textarea" rows="5" placeholder="Querido Papai Noel, meu sonho é…"
+                    required></textarea>
+                  <span class="campo-hint">Escreva com as próprias palavras da criança — preserve a voz
+                    autêntica.</span>
+                </div>
+
+                <div class="campo-wrap">
+                  <label class="campo-label" for="foto-inp">Foto da cartinha <span
+                      class="campo-opc">(opcional)</span></label>
+                  <div class="upload-box" id="upload-box" tabindex="0" role="button"
+                    aria-label="Selecionar foto da cartinha">
+                    <i class="bi bi-cloud-arrow-up-fill" aria-hidden="true"></i>
+                    <p>Arraste ou <span>clique para selecionar</span></p>
+                    <input type="file" id="foto-inp" accept="image/*" class="sr-only" />
+                  </div>
+                  <div id="foto-prev"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primario btn-full btn-g" id="btn-carta">
+                  <i class="bi bi-send-fill" aria-hidden="true"></i>
+                  Enviar Cartinha para Análise
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ TAB · DOAR DIRETO ══════════════════════════════ -->
+        <div class="tab-painel" id="tp-doar" role="tabpanel" aria-labelledby="tab-doar">
+          <div class="form-layout">
+
+            <aside class="form-aside">
+              <img src="./imagens_sobre/rena32.png" alt="" class="form-mascote" loading="lazy" />
+              <div class="aside-balao aside-ouro">
+                <i class="bi bi-gift-fill ab-icone" aria-hidden="true"></i>
+                <h3 class="ab-titulo">Doe sem escolher uma carta</h3>
+                <p>Leve diretamente a um ponto de coleta. Seu presente vai para quem mais precisa!</p>
+              </div>
+            </aside>
+
+            <div class="form-bloco">
+              <div class="fb-header">
+                <h2>Doe um presente direto</h2>
+                <p>Escolha o tipo de presente e o ponto de coleta mais próximo de você.</p>
+              </div>
+
+              <form id="form-doacao" novalidate>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="dp-pres">O que você quer doar? <span class="obg"
+                      aria-label="obrigatório">*</span></label>
+                  <select id="dp-pres" class="campo-select" required>
+                    <option value="">Selecione</option>
+                    <option value="bonecas">Bonecas</option>
+                    <option value="veiculos">Carrinhos</option>
+                    <option value="pelucia">Pelúcia</option>
+                    <option value="jogos">Jogos</option>
+                    <option value="bicicleta">Bicicleta</option>
+                    <option value="kit-escolar">Kit Escolar</option>
+                    <option value="bolas">Bola</option>
+                    <option value="arte">Arte</option>
+                    <option value="roupa">Roupas</option>
+                    <option value="tenis">Tênis</option>
+                    <option value="livros">Livros</option>
+                  </select>
+                </div>
+
+                <div class="campo-wrap">
+                  <label class="campo-label" for="dp-col">Ponto de coleta <span class="obg"
+                      aria-label="obrigatório">*</span></label>
+                  <select id="dp-col" class="campo-select" required>
+                    <option value="">Selecione o mais próximo</option>
+                    <option value="1">R. Alberto de Azevedo, 379 — Sta. Helena</option>
+                    <option value="2">Av. Paulo Pucci, 79 — Sta. Efigênia</option>
+                    <option value="3">R. Cândido Portinari, 899 — Campos Elísios</option>
+                    <option value="4">R. Augusto dos Anjos, 551 — Jd. Oliveiras</option>
+                    <option value="5">R. Manoel de Barros, 628 — Jd. Esmeralda</option>
+                  </select>
+                </div>
+
+                <div class="campo-wrap">
+                  <label class="campo-label" for="dp-nome">Seu nome <span class="campo-opc">(opcional)</span></label>
+                  <input type="text" id="dp-nome" class="campo-input" placeholder="Para registrar sua generosidade" />
+                </div>
+
+                <div class="info-caixa">
+                  <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+                  <p>Leve o presente <strong>embrulhado</strong> ao ponto selecionado. Nossa equipe entrega com carinho
+                    e confirma por e-mail.</p>
+                </div>
+
+                <button type="submit" class="btn btn-primario btn-full btn-g">
+                  <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                  Confirmar Doação
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── MODAL DE ADOÇÃO ─────────────────────────────────────── -->
+  <div class="modal-bg" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <div class="modal-box">
+      <button type="button" class="modal-x" id="btn-fechar" aria-label="Fechar diálogo">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <div data-partial="footer"></div>
+
+  <script src="./script/core.js" defer></script>
+  <script src="./script/partial.js" defer></script>
+  <script src="./script/cartas.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Entre ou cadastre-se gratuitamente no Conectando Sonhos. Escolha entre conta de doador ou instituição parceira."/>
+  <meta name="robots" content="noindex"/>
+  <title>Entrar | Conectando Sonhos</title>
+  <link rel="shortcut icon" href="./logotipo/favicon.ico"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="./style/design-system.css"/>
+  <link rel="stylesheet" href="./style/auth.css"/>
+</head>
+<body class="auth-pg">
+
+<a href="#auth-form" class="skip-link">Pular para o formulário</a>
+
+<div class="auth-layout">
+
+  <!-- ═══ COLUNA VISUAL ESQUERDA ═════════════════════════ -->
+  <aside class="auth-visual" aria-label="Apresentação do projeto">
+    <div class="av-bg" aria-hidden="true">
+      <img src="./fundo/fundo-impacto.png" alt="" loading="eager"/>
+      <div class="av-overlay"></div>
+    </div>
+
+    <div class="av-inner">
+
+      <a href="index.html" class="logo-link av-logo" aria-label="Voltar ao início">
+        <img src="./logotipo/logotipo.png" alt="" width="40" height="40"/>
+        <div>
+          <span class="logo-nome">Conectando Sonhos</span>
+          <span class="logo-sub">Solidariedade que transforma</span>
+        </div>
+      </a>
+
+      <div class="av-central">
+        <figure class="av-cita">
+          <span class="av-aspas" aria-hidden="true">"</span>
+          <blockquote>
+            <span class="texto_login">
+            Para uma criança em vulnerabilidade, um presente não é um objeto —
+            é a prova de que ela existe, é vista e importa para alguém.
+            </span>
+          </blockquote>
+        </figure>
+        <img src="./imagens_sobre/rena33.png" alt="" class="av-mascote" loading="lazy"/>
+      </div>
+
+      <div class="av-nums" role="list" aria-label="Estatísticas do projeto">
+        <div class="av-n" role="listitem">
+          <strong>412</strong>
+          <span>Doadores</span>
+        </div>
+        <div class="av-d" aria-hidden="true"></div>
+        <div class="av-n" role="listitem">
+          <strong>247</strong>
+          <span>Crianças</span>
+        </div>
+        <div class="av-d" aria-hidden="true"></div>
+        <div class="av-n" role="listitem">
+          <strong>148</strong>
+          <span>Entregues</span>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- ═══ COLUNA DE FORMULÁRIO ═══════════════════════════ -->
+  <main class="auth-form-panel" id="auth-form">
+    <div class="afp-inner">
+
+      <div class="afp-abas" role="tablist" aria-label="Selecione: entrar ou criar conta">
+        <button class="afp-aba ativa" data-alvo="login" role="tab"
+                aria-selected="true" aria-controls="ap-login" id="aba-login">
+          Entrar
+        </button>
+        <button class="afp-aba" data-alvo="cadastro" role="tab"
+                aria-selected="false" aria-controls="ap-cadastro" id="aba-cad">
+          Criar conta
+        </button>
+      </div>
+
+      <!-- ══ PAINEL · LOGIN ════════════════════════════════ -->
+      <section class="afp-painel ativo" id="ap-login" role="tabpanel" aria-labelledby="aba-login">
+
+        <div class="afp-hdr">
+          <h1>Bem-vindo de volta!</h1>
+          <p>Entre e veja as cartinhas que estão esperando por você.</p>
+        </div>
+
+        <form id="form-login" novalidate>
+          <div class="campo-wrap">
+            <label class="campo-label" for="l-email">E-mail</label>
+            <div class="ci-w">
+              <i class="bi bi-envelope" aria-hidden="true"></i>
+              <input type="email" id="l-email" class="campo-input ci-in"
+                     placeholder="seu@email.com" required autocomplete="email"/>
+            </div>
+          </div>
+
+          <div class="campo-wrap">
+            <label class="campo-label" for="l-senha">
+              Senha
+              <a href="#" class="link-esq" tabindex="-1">Esqueceu?</a>
+            </label>
+            <div class="ci-w">
+              <i class="bi bi-lock" aria-hidden="true"></i>
+              <input type="password" id="l-senha" class="campo-input ci-in"
+                     placeholder="Sua senha" required autocomplete="current-password"/>
+              <button type="button" class="btn-eye" data-alvo="l-senha"
+                      aria-label="Mostrar/ocultar senha">
+                <i class="bi bi-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-erro" id="err-login" role="alert" hidden></div>
+
+          <button type="submit" class="btn btn-primario btn-full btn-lg" id="btn-login">
+            Entrar na minha conta
+          </button>
+        </form>
+
+        <p class="afp-troca">
+          Não tem conta?
+          <button type="button" class="link-btn" data-alvo="cadastro">Criar gratuitamente</button>
+        </p>
+
+      </section>
+
+      <!-- ══ PAINEL · CADASTRO ═════════════════════════════ -->
+      <section class="afp-painel" id="ap-cadastro" role="tabpanel" aria-labelledby="aba-cad">
+
+        <div class="afp-hdr">
+          <h1>Criar conta grátis</h1>
+          <p>Junte-se a 412 doadores e realize um sonho hoje.</p>
+        </div>
+
+        <div class="tipo-sel" role="radiogroup" aria-label="Tipo de conta">
+          <button type="button" class="tipo-btn ativo" data-tipo="doador" role="radio" aria-checked="true">
+            <i class="bi bi-person-heart" aria-hidden="true"></i>
+            <div>
+              <strong>Sou Doador</strong>
+              <small>Quero adotar cartinhas</small>
+            </div>
+          </button>
+          <button type="button" class="tipo-btn" data-tipo="inst" role="radio" aria-checked="false">
+            <i class="bi bi-building-heart" aria-hidden="true"></i>
+            <div>
+              <strong>Sou Instituição</strong>
+              <small>Quero cadastrar crianças</small>
+            </div>
+          </button>
+        </div>
+
+        <!-- ── FORMULÁRIO DOADOR ─────────────────────── -->
+        <form class="cad-form ativo" id="cf-doador" novalidate>
+
+          <div class="grid-campos g2">
+            <div class="campo-wrap">
+              <label class="campo-label" for="d-nome">Nome completo <span class="obg" aria-label="obrigatório">*</span></label>
+              <input type="text" id="d-nome" class="campo-input" placeholder="Seu nome" required autocomplete="name"/>
+            </div>
+            <div class="campo-wrap">
+              <label class="campo-label" for="d-tel">Telefone <span class="obg" aria-label="obrigatório">*</span></label>
+              <input type="tel" id="d-tel" class="campo-input" placeholder="(16) 99999-9999" required autocomplete="tel"/>
+            </div>
+          </div>
+
+          <div class="campo-wrap">
+            <label class="campo-label" for="d-email">E-mail <span class="obg" aria-label="obrigatório">*</span></label>
+            <input type="email" id="d-email" class="campo-input" placeholder="seu@email.com" required autocomplete="email"/>
+          </div>
+
+          <div class="grid-campos g2">
+            <div class="campo-wrap">
+              <label class="campo-label" for="d-senha">Senha <span class="obg" aria-label="obrigatório">*</span></label>
+              <div class="ci-w">
+                <input type="password" id="d-senha" class="campo-input"
+                       placeholder="Mín. 8 caracteres" required autocomplete="new-password" minlength="8"/>
+                <button type="button" class="btn-eye" data-alvo="d-senha" aria-label="Mostrar/ocultar senha">
+                  <i class="bi bi-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="campo-wrap">
+              <label class="campo-label" for="d-senha2">Confirmar <span class="obg" aria-label="obrigatório">*</span></label>
+              <input type="password" id="d-senha2" class="campo-input"
+                     placeholder="Repita a senha" required autocomplete="new-password"/>
+            </div>
+          </div>
+
+          <details class="end-acc">
+            <summary>
+              <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+              Endereço <span class="campo-opc">(opcional)</span>
+            </summary>
+            <div class="ea-body">
+              <div class="grid-campos g2">
+                <div class="campo-wrap">
+                  <label class="campo-label" for="d-cep">CEP</label>
+                  <input type="text" id="d-cep" class="campo-input"
+                         placeholder="00000-000" maxlength="9" autocomplete="postal-code"/>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="d-uf">UF</label>
+                  <select id="d-uf" class="campo-select">
+                    <option>SP</option><option>MG</option><option>RJ</option>
+                    <option>PR</option><option>RS</option><option>SC</option>
+                    <option>BA</option><option>GO</option><option>DF</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-campos g2">
+                <div class="campo-wrap">
+                  <label class="campo-label" for="d-cidade">Cidade</label>
+                  <input type="text" id="d-cidade" class="campo-input" placeholder="Cidade"/>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="d-bairro">Bairro</label>
+                  <input type="text" id="d-bairro" class="campo-input" placeholder="Bairro"/>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <div class="form-erro" id="err-doador" role="alert" hidden></div>
+
+          <button type="submit" class="btn btn-primario btn-full btn-lg" id="btn-cad-d">
+            <i class="bi bi-person-check-fill" aria-hidden="true"></i>
+            Criar minha conta
+          </button>
+        </form>
+
+        <!-- ── FORMULÁRIO INSTITUIÇÃO ────────────────── -->
+        <form class="cad-form" id="cf-inst" novalidate>
+
+          <div class="campo-wrap">
+            <label class="campo-label" for="i-nome">Nome da instituição <span class="obg" aria-label="obrigatório">*</span></label>
+            <input type="text" id="i-nome" class="campo-input" placeholder="Nome completo da instituição" required/>
+          </div>
+
+          <div class="grid-campos g2">
+            <div class="campo-wrap">
+              <label class="campo-label" for="i-tipo">Tipo <span class="obg" aria-label="obrigatório">*</span></label>
+              <select id="i-tipo" class="campo-select" required>
+                <option value="">Selecione</option>
+                <option value="ong">ONG</option>
+                <option value="abrigo">Abrigo</option>
+                <option value="projeto-social">Projeto Social</option>
+                <option value="escola">Escola</option>
+                <option value="igreja">Inst. Religiosa</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <div class="campo-wrap">
+              <label class="campo-label" for="i-cnpj">CNPJ</label>
+              <input type="text" id="i-cnpj" class="campo-input" placeholder="00.000.000/0001-00"/>
+            </div>
+          </div>
+
+          <div class="campo-wrap">
+            <label class="campo-label" for="i-email">E-mail institucional <span class="obg" aria-label="obrigatório">*</span></label>
+            <input type="email" id="i-email" class="campo-input" placeholder="contato@instituicao.org" required/>
+          </div>
+
+          <div class="grid-campos g2">
+            <div class="campo-wrap">
+              <label class="campo-label" for="i-resp">Responsável <span class="obg" aria-label="obrigatório">*</span></label>
+              <input type="text" id="i-resp" class="campo-input" placeholder="Nome do responsável" required/>
+            </div>
+            <div class="campo-wrap">
+              <label class="campo-label" for="i-tel">Telefone <span class="obg" aria-label="obrigatório">*</span></label>
+              <input type="tel" id="i-tel" class="campo-input" placeholder="(XX) XXXXX-XXXX" required/>
+            </div>
+          </div>
+
+          <div class="grid-campos g2">
+            <div class="campo-wrap">
+              <label class="campo-label" for="i-senha">Senha <span class="obg" aria-label="obrigatório">*</span></label>
+              <div class="ci-w">
+                <input type="password" id="i-senha" class="campo-input"
+                       placeholder="Mín. 8 caracteres" required autocomplete="new-password" minlength="8"/>
+                <button type="button" class="btn-eye" data-alvo="i-senha" aria-label="Mostrar/ocultar senha">
+                  <i class="bi bi-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="campo-wrap">
+              <label class="campo-label" for="i-senha2">Confirmar <span class="obg" aria-label="obrigatório">*</span></label>
+              <input type="password" id="i-senha2" class="campo-input"
+                     placeholder="Repita a senha" required autocomplete="new-password"/>
+            </div>
+          </div>
+
+          <div class="form-erro" id="err-inst" role="alert" hidden></div>
+
+          <button type="submit" class="btn btn-primario btn-full btn-lg" id="btn-cad-i">
+            <i class="bi bi-building-check" aria-hidden="true"></i>
+            Cadastrar Instituição
+          </button>
+        </form>
+
+        <p class="afp-troca">
+          Já tem conta?
+          <button type="button" class="link-btn" data-alvo="login">Fazer login</button>
+        </p>
+
+      </section>
+
+    </div>
+  </main>
+
+</div>
+
+<div class="toasts" role="status" aria-live="polite" aria-atomic="false"></div>
+
+<script src="./script/core.js" defer></script>
+<script src="./script/auth.js" defer></script>
+</body>
+</html>
