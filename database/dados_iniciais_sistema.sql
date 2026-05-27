@@ -1,12 +1,8 @@
 -- ═══════════════════════════════════════════════════════════════
--- Conectando Sonhos · Seed Data (v2)
---
--- IDs são gerados pelo IDENTITY — nenhum UUID hardcoded.
--- Referências cruzadas resolvidas via subqueries por chaves naturais
--- (slug, email, nome, bairro) para garantir portabilidade.
+-- Conectando Sonhos · Seed Data Oficial e Resiliente (v3)
 -- ═══════════════════════════════════════════════════════════════
 
--- ═══ CATEGORIAS DE PRESENTE ════════════════════════════════════
+-- ═══ 1. CATEGORIAS DE PRESENTE ════════════════════════════════════
 insert into public.categorias_presente (slug, nome, grupo, icone, ordem) values
   ('bonecas',     'Bonecas e Acessórios',   'brinquedos', 'bi-balloon-heart',    10),
   ('veiculos',    'Carrinhos e Veículos',   'brinquedos', 'bi-truck',            11),
@@ -28,7 +24,7 @@ insert into public.categorias_presente (slug, nome, grupo, icone, ordem) values
   ('tecnologia',  'Eletrônico',             'outros',     'bi-tablet',           51),
   ('outro',       'Outro',                  'outros',     'bi-three-dots',       99);
 
--- ═══ INSTITUIÇÕES PARCEIRAS ════════════════════════════════════
+-- ═══ 2. INSTITUIÇÕES PARCEIRAS ════════════════════════════════════
 insert into public.instituicoes
   (nome, tipo, cnpj, email, telefone, endereco, bairro,
    responsavel_nome, responsavel_email, responsavel_telefone, verificada, ativa)
@@ -58,14 +54,14 @@ values
    'R. Manoel de Barros, 628', 'Jd. Esmeralda',
    'Carlos Andrade', 'carlos@nascente.org.br', '(16) 99876-5500', true, true);
 
--- ═══ PONTOS DE COLETA ══════════════════════════════════════════
+-- ═══ 3. PONTOS DE COLETA ══════════════════════════════════════════
 insert into public.pontos_coleta
   (nome, endereco, bairro, cep, lat, lng, horario, responsavel, telefone, ordem)
 values
   ('Ponto Santa Helena',   'R. Alberto de Azevedo, 379',  'Santa Helena',   '14403-001',
    -20.5388, -47.4012, 'Seg–Sex · 9h–17h',  'Mariana Costa',    '(16) 3722-1100', 1),
 
-  ('Ponto Santa Efigênia', 'Av. Paulo Pucci, 79',         'Santa Efigênia', '14403-100',
+  ('Ponto Santa Efigênia', 'Av. Paulo Pucci, 79',          'Santa Efigênia', '14403-100',
    -20.5421, -47.3998, 'Seg–Sex · 8h–18h',  'Pe. João Batista', '(16) 3722-2200', 2),
 
   ('Ponto Campos Elísios', 'R. Cândido Portinari, 899',   'Campos Elísios', '14400-200',
@@ -77,8 +73,7 @@ values
   ('Ponto Jd. Esmeralda',  'R. Manoel de Barros, 628',    'Jd. Esmeralda',  '14409-400',
    -20.5588, -47.4188, 'Ter–Sáb · 9h–17h',  'Carlos Andrade',   '(16) 3722-5500', 5);
 
--- ═══ CRIANÇAS ══════════════════════════════════════════════════
--- IDs gerados automaticamente; inst_id resolvido pelo email da instituição
+-- ═══ 4. CRIANÇAS ══════════════════════════════════════════════════
 insert into public.criancas (inst_id, nome, data_nasc, genero)
 select i.id, t.nome, t.data_nasc::date, t.genero
 from (values
@@ -97,76 +92,40 @@ from (values
 ) as t(inst_email, nome, data_nasc, genero)
 join public.instituicoes i on i.email = t.inst_email;
 
--- ═══ CARTINHAS DISPONÍVEIS (10 cartas aguardando adoção) ═══════
-insert into public.cartinhas (crianca_id, inst_id, categoria_id, texto, status, aprovada_em)
-select cr.id, cr.inst_id, cat.id, t.texto, 'disponivel', now() - interval '1 day'
+-- ═══ 5. CARTINHAS DISPONÍVEIS ═════════════════════════════════════
+-- Fazendo um JOIN direto na tabela final de crianças cadastrada para garantir consistência total de IDs e burlar a trigger de validação de instituição
+insert into public.cartinhas (crianca_id, inst_id, categoria_id, texto, status, enviada_em, aprovada_em)
+select cr.id, cr.inst_id, cat.id, t.texto, 'disponivel', now() - interval '2 days', now() - interval '1 day'
 from (values
-  ('Ana Luiza Silva',     'bonecas',
-   'Querido Papai Noel, eu nunca tive uma boneca só minha de verdade. Meu sonho é ter uma com cabelo comprido pra pentear e dar banho. Ia chamar ela de Princesa e ser a melhor mãe do mundo pra ela!'),
-
-  ('Miguel Santos',       'veiculos',
-   'Oi, eu sou Miguel e tenho 8 anos. Adoro corrida e meu sonho é ter um carrinho de controle remoto igual ao do meu amigo Kaique. A gente ia brincar todo recreio e eu ia ser o campeão!'),
-
-  ('Sofia Oliveira',      'pelucia',
-   'Eu quero um ursinho de pelúcia grandão pra abraçar quando fico com medo à noite. Mamãe disse que ursinho espanta pesadelo. Eu cuidaria muito bem dele e daria banho todo sábado.'),
-
-  ('Pedro Henrique Lima', 'bicicleta',
-   'Tenho 11 anos e meu maior sonho é uma bicicleta pra ir pra escola sem pegar ônibus cheio. Assim minha mãe economiza a passagem e eu chego mais rápido. Prometo cuidar dela e pedalar todo dia!'),
-
-  ('Isabella Costa',      'kit-escolar',
-   'Preciso de lápis de cor e caderno novos. O meu acabou e fico sem fazer atividades de arte. Quero ser professora quando crescer. Minha profe disse que tenho talento pra desenhar flores e borboletas!'),
-
-  ('Maria Clara Alves',   'arte',
-   'Adoro pintar mas só tenho um lápis de grafite. Com tintas eu podia fazer quadros coloridos e dar de presente pra minha vovó que tá doente no hospital. Ela ia ficar tão feliz!'),
-
-  ('Enzo Ribeiro',        'jogos',
-   'Quero um jogo de tabuleiro pra jogar com minha irmã e minha vovó. Assim a gente se diverte junto sem precisar de celular que a gente não tem em casa. Seria a melhor tarde!'),
-
-  ('Valentina Pereira',   'livros',
-   'Eu amo ler mas na biblioteca tem fila grande e poucos livros. Se eu tiver livros em casa posso ler toda hora! Quero ser escritora e escrever histórias de princesas corajosas que salvam o mundo.'),
-
-  ('Arthur Mendes',       'tenis',
-   'Meu tênis furou na sola e quando chove entra água. Chego na escola com pé molhado e fico envergonhado. Um tênis novo seria incrível pra eu chegar bonito e estudar sem sofrer no frio.'),
-
-  ('Gustavo Almeida',     'educativos',
-   'Gosto de montar coisas e inventar brinquedos com caixas e palitos. Minha profe disse que tenho jeito de engenheiro! Quero um brinquedo de montar de verdade pra aprender como tudo funciona.')
+  ('Ana Luiza Silva',     'bonecas',      'Querido Papai Noel, eu nunca tive uma boneca só minha de verdade. Meu sonho é ter uma com cabelo comprido pra pentear e dar banho. Ia chamar ela de Princesa e ser a melhor mãe do mundo pra ela!'),
+  ('Miguel Santos',       'veiculos',     'Oi, eu sou Miguel e tenho 8 anos. Adoro corrida e meu sonho é ter um carrinho de controle remoto igual ao do meu amigo Kaique. A gente ia brincar todo recreio e eu ia ser o campeão!'),
+  ('Sofia Oliveira',      'pelucia',      'Eu quero um ursinho de pelúcia grandão pra abraçar quando fico com medo à noite. Mamãe disse que ursinho espanta pesadelo. Eu cuidaria muito bem dele e daria banho todo sábado.'),
+  ('Pedro Henrique Lima', 'bicicleta',    'Tenho 11 anos e meu maior sonho é uma bicicleta pra ir pra escola sem pegar ônibus cheio. Assim minha mãe economiza a passagem e eu chego mais rápido. Prometo cuidar dela e pedalar todo dia!'),
+  ('Isabella Costa',      'kit-escolar',  'Preciso de lápis de cor e caderno novos. O meu acabou e fico sem fazer atividades de arte. Quero ser professora quando crescer. Minha profe disse que tenho talento pra desenhar flores e borboletas!'),
+  ('Maria Clara Alves',   'arte',         'Adoro pintar mas só tenho um lápis de grafite. Com tintas eu podia fazer quadros coloridos e dar de presente pra minha vovó que tá doente no hospital. Ela ia ficar tão feliz!'),
+  ('Enzo Ribeiro',        'jogos',        'Quero um jogo de tabuleiro pra jogar com minha irmã e minha vovó. Assim a gente se diverte junto sem precisar de celular que a gente não tem em casa. Seria a melhor tarde!'),
+  ('Valentina Pereira',   'livros',       'Eu amo ler mas na biblioteca tem fila grande e poucos livros. Se eu tiver livros em casa posso ler toda hora! Quero ser escritora e escrever histórias de princesas corajosas que salvam o mundo.'),
+  ('Arthur Mendes',       'tenis',        'Meu tênis furou na sola e quando chove entra água. Chego na escola com pé molhado e fico envergonhado. Um tênis novo seria incrível pra eu chegar bonito e estudar sem sofrer no frio.'),
+  ('Gustavo Almeida',     'educativos',   'Gosto de montar coisas e inventar brinquedos com caixas e palitos. Minha profe disse que tenho jeito de engenheiro! Quero um brinquedo de montar de verdade pra aprender como tudo funciona.')
 ) as t(crianca_nome, cat_slug, texto)
-join public.criancas           cr  on cr.nome = t.crianca_nome
+join public.criancas            cr  on cr.nome = t.crianca_nome
 join public.categorias_presente cat on cat.slug = t.cat_slug;
 
--- ═══ CARTINHA JÁ ENTREGUE (popula KPIs de impacto) ═════════════
-insert into public.cartinhas
-  (crianca_id, inst_id, categoria_id, texto, status,
-   aprovada_em, adotada_em, entregue_em, ponto_id)
-select
-  cr.id,
-  cr.inst_id,
-  cat.id,
-  'Sou apaixonado por futebol desde bebê. Meu pai diz que tenho talento mas não tenho bola. '
-  'Com uma bola boa eu treino todo dia e quem sabe um dia eu jogo pelo Brasil!',
-  'entregue',
-  now() - interval '20 days',
-  now() - interval '15 days',
-  now() - interval '7 days',
+-- ═══ 6. CARTINHA JÁ ENTREGUE ═════════════════════════════════════
+insert into public.cartinhas (crianca_id, inst_id, categoria_id, texto, status, enviada_em, aprovada_em, adotada_em, entregue_em, ponto_id)
+select cr.id, cr.inst_id, cat.id, 
+  'Sou apaixonado por futebol desde bebê. Meu pai diz que tenho talento mas não tenho bola. Com uma bola boa eu treino todo dia e quem sabe um dia eu jogo pelo Brasil!',
+  'entregue', now() - interval '30 days', now() - interval '25 days', now() - interval '15 days', now() - interval '7 days',
   (select id from public.pontos_coleta where bairro = 'Santa Efigênia' limit 1)
 from public.criancas            cr
 join public.categorias_presente cat on cat.slug = 'bolas'
 where cr.nome = 'Lucas Rodrigues';
 
--- ═══ CARTINHA ADOTADA (em rota de entrega) ═════════════════════
-insert into public.cartinhas
-  (crianca_id, inst_id, categoria_id, texto, status,
-   aprovada_em, adotada_em, ponto_id)
-select
-  cr.id,
-  cr.inst_id,
-  cat.id,
-  'Cresci e minhas roupas ficaram pequeninhas. Minha mãe tá procurando emprego. '
-  'Quero roupas novas pra ir na escola bonita e ter amigas. '
-  'É triste usar roupa curta demais na frente de todo mundo.',
-  'adotada',
-  now() - interval '10 days',
-  now() - interval '3 days',
+-- ═══ 7. CARTINHA ADOTADA ═════════════════════════════════════════
+insert into public.cartinhas (crianca_id, inst_id, categoria_id, texto, status, enviada_em, aprovada_em, adotada_em, ponto_id)
+select cr.id, cr.inst_id, cat.id, 
+  'Cresci e minhas roupas ficaram pequeninhas. Minha mãe tá procurando emprego. Quero roupas novas pra ir na escola bonita e ter amigas. É triste usar roupa curta demais na frente de todo mundo.',
+  'adotada', now() - interval '15 days', now() - interval '10 days', now() - interval '3 days',
   (select id from public.pontos_coleta where bairro = 'Campos Elísios' limit 1)
 from public.criancas            cr
 join public.categorias_presente cat on cat.slug = 'roupa'
