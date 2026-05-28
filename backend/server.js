@@ -1,3 +1,6 @@
+//PARA SER APAGADO DEPOIS, SÓ PARA TESTE DO POSTMAN
+// Este arquivo é apenas para testes rápidos no Postman, sem passar por rotas ou controllers complexos. Ele pode ser removido depois que as rotas e controllers estiverem funcionando corretamente.
+
 require('dotenv').config();
 const express = require('express');
 
