@@ -198,3 +198,7 @@ create policy dd_select_self on public.doacoes_diretas
 
 create policy dd_admin_all on public.doacoes_diretas
   for all using (public.is_admin()) with check (public.is_admin());
+
+-- Qualquer visitante (inclusive não autenticado) pode enviar dados para se cadastrar
+create policy inst_insert_public on public.instituicoes
+  for insert with check (true);
