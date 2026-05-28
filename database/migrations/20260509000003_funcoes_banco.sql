@@ -81,7 +81,9 @@ create trigger trg_cart_event
 -- ═══ Trigger: garante que cartinha.inst_id = crianca.inst_id ════
 -- Evita inconsistência onde uma cartinha aponta para criança de outra inst.
 create or replace function public.cartinha_inst_consistency()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql 
+set search_path = public, pg_temp
+as $$
 declare
   c_inst bigint;
 begin
@@ -288,9 +290,20 @@ begin
   return nova;
 end $$;
 
--- ═══ Permissões: usuários autenticados chamam os RPCs ═══════════
-grant execute on function public.adotar_cartinha(bigint, bigint)              to authenticated;
-grant execute on function public.marcar_entregue(bigint)                      to authenticated;
-grant execute on function public.aprovar_cartinha(bigint)                     to authenticated;
-grant execute on function public.cancelar_cartinha(bigint, text)              to authenticated;
-grant execute on function public.cadastrar_cartinha(bigint,text,date,text,bigint,text,text) to authenticated;
+-- ═══ Permissões Corrigidas: Remove o padrão público e restringe ═══════
+
+-- ═══ Permissões Corrigidas: Remove o padrão público e restringe ═══════
+
+-- 1. Remove o privilégio padrão do Postgres de dar acesso público a novas funções
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
+
+-- 2. Tira o acesso automático de usuários não logados (anon/public) de todas as funções
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM PUBLIC;
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM anon;
+
+-- 3. Garante as permissões explícitas apenas para os usuários autenticados chamarem os RPCs
+GRANT EXECUTE ON FUNCTION public.adotar_cartinha(bigint, bigint)              TO authenticated;
+GRANT EXECUTE ON FUNCTION public.marcar_entregue(bigint)                      TO authenticated;
+GRANT EXECUTE ON FUNCTION public.aprovar_cartinha(bigint)                     TO authenticated;
+GRANT EXECUTE ON FUNCTION public.cancelar_cartinha(bigint, text)              TO authenticated;
+GRANT EXECUTE ON FUNCTION public.cadastrar_cartinha(bigint,text,date,text,bigint,text,text) TO authenticated;

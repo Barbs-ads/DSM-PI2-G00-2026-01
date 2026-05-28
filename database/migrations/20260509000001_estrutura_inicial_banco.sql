@@ -16,8 +16,11 @@
 -- ═══════════════════════════════════════════════════════════════
 
 -- ── Helper: atualiza updated_at automaticamente ─────────────────
+-- ── Helper: atualiza updated_at automaticamente ─────────────────
 create or replace function public.set_updated_at()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql 
+set search_path = public, pg_temp    -- <── A correção entra aqui!
+as $$
 begin
   new.updated_at = now();
   return new;
