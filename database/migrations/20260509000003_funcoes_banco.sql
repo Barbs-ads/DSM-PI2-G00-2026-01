@@ -81,7 +81,9 @@ create trigger trg_cart_event
 -- ═══ Trigger: garante que cartinha.inst_id = crianca.inst_id ════
 -- Evita inconsistência onde uma cartinha aponta para criança de outra inst.
 create or replace function public.cartinha_inst_consistency()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql 
+set search_path = public, pg_temp
+as $$
 declare
   c_inst bigint;
 begin
@@ -288,7 +290,19 @@ begin
   return nova;
 end $$;
 
--- ═══ Permissões: usuários autenticados chamam os RPCs ═══════════
+-- ═══ Permissões Corrigidas: Remove o padrão público e restringe ═══════
+
+-- 1. Tira o acesso automático de usuários não logados (anon/public)
+REVOKE EXECUTE ON FUNCTION public.handle_new_user() FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.log_cartinha_event() FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.cartinha_inst_consistency() FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.adotar_cartinha(bigint, bigint) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.marcar_entregue(bigint) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.aprovar_cartinha(bigint) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.cancelar_cartinha(bigint, text) FROM PUBLIC;
+REVOKE EXECUTE ON FUNCTION public.cadastrar_cartinha(bigint,text,date,text,bigint,text,text) FROM PUBLIC;
+
+-- 2. Agora sim, libera o acesso apenas para os usuários logados no sistema
 grant execute on function public.adotar_cartinha(bigint, bigint)              to authenticated;
 grant execute on function public.marcar_entregue(bigint)                      to authenticated;
 grant execute on function public.aprovar_cartinha(bigint)                     to authenticated;
