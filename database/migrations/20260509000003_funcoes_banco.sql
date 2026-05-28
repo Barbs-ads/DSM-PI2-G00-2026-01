@@ -292,19 +292,18 @@ end $$;
 
 -- ═══ Permissões Corrigidas: Remove o padrão público e restringe ═══════
 
--- 1. Tira o acesso automático de usuários não logados (anon/public)
-REVOKE EXECUTE ON FUNCTION public.handle_new_user() FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION public.log_cartinha_event() FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION public.cartinha_inst_consistency() FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION public.adotar_cartinha(bigint, bigint) FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION public.marcar_entregue(bigint) FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION public.aprovar_cartinha(bigint) FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION public.cancelar_cartinha(bigint, text) FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION public.cadastrar_cartinha(bigint,text,date,text,bigint,text,text) FROM PUBLIC;
+-- ═══ Permissões Corrigidas: Remove o padrão público e restringe ═══════
 
--- 2. Agora sim, libera o acesso apenas para os usuários logados no sistema
-grant execute on function public.adotar_cartinha(bigint, bigint)              to authenticated;
-grant execute on function public.marcar_entregue(bigint)                      to authenticated;
-grant execute on function public.aprovar_cartinha(bigint)                     to authenticated;
-grant execute on function public.cancelar_cartinha(bigint, text)              to authenticated;
-grant execute on function public.cadastrar_cartinha(bigint,text,date,text,bigint,text,text) to authenticated;
+-- 1. Remove o privilégio padrão do Postgres de dar acesso público a novas funções
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;
+
+-- 2. Tira o acesso automático de usuários não logados (anon/public) de todas as funções
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM PUBLIC;
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM anon;
+
+-- 3. Garante as permissões explícitas apenas para os usuários autenticados chamarem os RPCs
+GRANT EXECUTE ON FUNCTION public.adotar_cartinha(bigint, bigint)              TO authenticated;
+GRANT EXECUTE ON FUNCTION public.marcar_entregue(bigint)                      TO authenticated;
+GRANT EXECUTE ON FUNCTION public.aprovar_cartinha(bigint)                     TO authenticated;
+GRANT EXECUTE ON FUNCTION public.cancelar_cartinha(bigint, text)              TO authenticated;
+GRANT EXECUTE ON FUNCTION public.cadastrar_cartinha(bigint,text,date,text,bigint,text,text) TO authenticated;
