@@ -2,16 +2,16 @@ const PresenteAvulso = require('../models/PresenteAvulso');
 
 class PresenteController {
   async doarAvulso(req, res) {
-    try {
-      const novoPresente = await PresenteAvulso.criar(req.body, req.token);
-      res.status(201).json({
-        mensagem: '✅ Registro de presente avulso feito! Muito obrigado pela generosidade.',
-        novoPresente
-      });
-    } catch (erro) {
-      res.status(400).json({ erro: erro.message });
-    }
+  try {
+    const novaDoacaoDireta = await PresenteAvulso.criar(req.body, req.token);
+    res.status(201).json({
+      mensagem: '✅ Doação registrada! Muito obrigado pela generosidade.',
+      novaDoacaoDireta
+    });
+  } catch (erro) {
+    res.status(400).json({ erro: erro.message });
   }
+}
 
   async listarAvulsos(req, res) {
     try {

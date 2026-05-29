@@ -6,7 +6,7 @@ class PresenteAvulso {
     try {
       const client = getSupabaseAutenticado(token);
       const { data, error } = await client
-        .from('presentes_avulsos')
+        .from('doacoes_diretas')   
         .select('*');
 
       if (error) throw error;
@@ -16,17 +16,27 @@ class PresenteAvulso {
     }
   }
 
-  //REGISTRAR DOAÇÃO AVULSA
+  // REGISTRAR DOAÇÃO DIRETA
   static async criar(dados, token) {
     try {
       const client = getSupabaseAutenticado(token);
+
+      
+      const { data: userData, error: userError } = await client
+        .from('usuarios')
+        .select('id')
+        .single();
+
+      if (userError) throw userError;
+
       const { data, error } = await client
-        .from('presentes_avulsos')
+        .from('doacoes_diretas')   
         .insert({
-          descricao: dados.descricao,
+          doador_id:   userData.id,          
+          observacoes: dados.descricao,      
           categoria_id: dados.categoria_id,
-          ponto_id: dados.ponto_id,
-          status: 'recebido'
+          ponto_id:    dados.ponto_id,
+          status:      'recebida'            
         })
         .select();
 
