@@ -1,588 +1,602 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Adote a cartinha de uma criança em vulnerabilidade social e realize um sonho real. Projeto solidário em Franca/SP — FATEC DSM."/>
-  <meta property="og:title" content="Conectando Sonhos — Uma criança escreveu seu sonho"/>
-  <meta property="og:description" content="Escolha uma cartinha, compre o presente e entregue num ponto de coleta. Tão simples quanto um gesto de amor."/>
-  <meta property="og:type" content="website"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Adote a cartinha de uma criança em vulnerabilidade social e realize um sonho real. Projeto solidário em Franca/SP — FATEC DSM." />
+  <meta property="og:title" content="Conectando Sonhos — Uma criança escreveu seu sonho" />
+  <meta property="og:description"
+    content="Escolha uma cartinha, compre o presente e entregue num ponto de coleta. Tão simples quanto um gesto de amor." />
+  <meta property="og:type" content="website" />
   <title>Conectando Sonhos — Uma criança escreveu seu sonho</title>
-  <link rel="shortcut icon" href="./logotipo/favicon.ico"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
-  <link rel="stylesheet" href="./style/design-system.css"/>
-  <link rel="stylesheet" href="./style/index.css"/>
+  <link rel="shortcut icon" href="./logotipo/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="./style/design-system.css" />
+  <link rel="stylesheet" href="./style/index.css" />
 </head>
+
 <body>
 
-<div data-partial="header"></div>
-<main id="conteudo">
+  <div data-partial="header"></div>
+  <main id="conteudo">
 
-<!-- ══ ATO 1 · HERO — O momento em que uma carta chega ══════ -->
-<section class="hero" id="topo" aria-label="Apresentação do projeto">
+    <!-- ══ ATO 1 · HERO — O momento em que uma carta chega ══════ -->
+    <section class="hero" id="topo" aria-label="Apresentação do projeto">
 
-  <!-- Fundo fotográfico com overlay cinematográfico -->
-  <div class="hero-fundo" aria-hidden="true">
-    <img src="./fundo/pastoral_img15.png" alt="" class="hero-foto" fetchpriority="high"/>
-    <div class="hero-manto"></div>
-    <div class="hero-padrao"></div>
-    <!-- Partículas flutuantes decorativas -->
-    <div class="hero-particulas">
-      <span class="pt pt1">✦</span><span class="pt pt2">✧</span>
-      <span class="pt pt3">✦</span><span class="pt pt4">·</span>
-      <span class="pt pt5">✧</span><span class="pt pt6">✦</span>
-    </div>
-  </div>
-
-  <!-- Grade áurea φ: 61.8% texto · 38.2% envelope -->
-  <div class="container-lg hero-grade">
-
-    <!-- COLUNA ESQUERDA — 61.8% — Narrativa principal -->
-    <div class="hero-texto">
-
-      <!-- Credencial ao vivo -->
-      <div class="hero-credencial entra">
-        <span class="hc-vivo" aria-label="Ao vivo"></span>
-        <span><strong id="n-cred-disp">247</strong> cartinhas aguardando em Franca/SP</span>
-        <span class="hc-sep" aria-hidden="true">·</span>
-        <span class="carimbo hero-carimbo" aria-hidden="true">2026</span>
-      </div>
-
-      <!-- Manchete principal — Lora 68px escala Fibonacci -->
-      <h1 class="hero-manchete entra d1">
-        Uma criança<br/>
-        <em>escreveu seu<br/>sonho</em> num papel.<br/>
-        <span class="hm-sub">Você pode realizá-lo.</span>
-      </h1>
-
-      <!-- Lead persuasivo -->
-      <p class="hero-lead entra d2">
-        Instituições cadastram cartinhas de crianças em vulnerabilidade.
-        Você escolhe uma, compra o presente e entrega num ponto de coleta.
-        <strong>Tão simples quanto um gesto de amor.</strong>
-      </p>
-
-      <!-- CTAs principais -->
-      <div class="hero-acoes entra d3" role="group" aria-label="Ações principais">
-        <a href="cartas.html" class="btn btn-ouro btn-gg hero-cta-principal">
-          <i class="bi bi-heart-fill" aria-hidden="true"></i>
-          Adotar uma Cartinha
-        </a>
-        <a href="sobre.html" class="btn btn-outline-branco btn-g">
-          Como funciona
-          <i class="bi bi-arrow-right" aria-hidden="true"></i>
-        </a>
-      </div>
-
-      <!-- Prova social com avatares -->
-      <div class="hero-prova entra d4" aria-label="Prova social">
-        <div class="hp-faces" aria-hidden="true">
-          <div class="hp-face" style="background:var(--azul)">M</div>
-          <div class="hp-face" style="background:var(--ouro-esc)">R</div>
-          <div class="hp-face" style="background:var(--postal-suav)">F</div>
-          <div class="hp-face" style="background:rgba(255,255,255,.18);font-size:.55rem">+</div>
-        </div>
-        <p><strong>412 doadores</strong> já realizaram sonhos este ano</p>
-      </div>
-
-      <!-- Garantias rápidas -->
-      <div class="hero-garantias entra d4" aria-label="Garantias">
-        <div class="hg-item">
-          <i class="bi bi-shield-fill-check" aria-hidden="true"></i>
-          <span>100% transparente</span>
-        </div>
-        <div class="hg-item">
-          <i class="bi bi-building-heart" aria-hidden="true"></i>
-          <span>5 instituições verificadas</span>
-        </div>
-        <div class="hg-item">
-          <i class="bi bi-gift-fill" aria-hidden="true"></i>
-          <span>Gratuito para participar</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- COLUNA DIREITA — 38.2% — Envelope-carta animado -->
-    <div class="hero-envelope-wrap entra d2" aria-label="Exemplo de cartinha" role="presentation">
-
-      <!-- Fita de embrulho decorativa -->
-      <div class="envelope-fita" aria-hidden="true">
-        <div class="ef-h"></div>
-        <div class="ef-v"></div>
-        <div class="ef-laco">
-          <div class="ef-anel"></div>
-          <div class="ef-orelha ef-orelha-e"></div>
-          <div class="ef-orelha ef-orelha-d"></div>
+      <!-- Fundo fotográfico com overlay cinematográfico -->
+      <div class="hero-fundo" aria-hidden="true">
+        <img src="./fundo/pastoral_img15.png" alt="" class="hero-foto" fetchpriority="high" />
+        <div class="hero-manto"></div>
+        <div class="hero-padrao"></div>
+        <!-- Partículas flutuantes decorativas -->
+        <div class="hero-particulas">
+          <span class="pt pt1">✦</span><span class="pt pt2">✧</span>
+          <span class="pt pt3">✦</span><span class="pt pt4">·</span>
+          <span class="pt pt5">✧</span><span class="pt pt6">✦</span>
         </div>
       </div>
 
-      <!-- Envelope principal -->
-      <article class="envelope" aria-label="Cartinha de exemplo da Ana Luiza">
-        <!-- Aba SVG triangular -->
-        <div class="env-aba" aria-hidden="true">
-          <svg viewBox="0 0 380 70" xmlns="http://www.w3.org/2000/svg" class="env-aba-svg" aria-hidden="true">
-            <path d="M0 0 L380 0 L190 70 Z" fill="var(--papel-2)"/>
-            <path d="M0 0 L380 0 L190 70 Z" fill="none" stroke="var(--pergaminho)" stroke-width="1.5"/>
-          </svg>
-          <div class="env-selos" aria-hidden="true">
-            <div class="selo-postal">
-              <div class="sp-borda"></div>
-              <i class="bi bi-heart-fill sp-icone"></i>
-              <span class="sp-val">AMOR</span>
+      <!-- Grade áurea φ: 61.8% texto · 38.2% envelope -->
+      <div class="container-lg hero-grade">
+
+        <!-- COLUNA ESQUERDA — 61.8% — Narrativa principal -->
+        <div class="hero-texto">
+
+          <!-- Credencial ao vivo -->
+          <div class="hero-credencial entra">
+            <span class="hc-vivo" aria-label="Ao vivo"></span>
+            <span><strong id="n-cred-disp">247</strong> cartinhas aguardando em Franca/SP</span>
+            <span class="hc-sep" aria-hidden="true">·</span>
+            <span class="carimbo hero-carimbo" aria-hidden="true">2026</span>
+          </div>
+
+          <!-- Manchete principal — Lora 68px escala Fibonacci -->
+          <h1 class="hero-manchete entra d1">
+            Uma criança<br />
+            <em>escreveu seu<br />sonho</em> num papel.<br />
+            <span class="hm-sub">Você pode realizá-lo.</span>
+          </h1>
+
+          <!-- Lead persuasivo -->
+          <p class="hero-lead entra d2">
+            Instituições cadastram cartinhas de crianças em vulnerabilidade.
+            Você escolhe uma, compra o presente e entrega num ponto de coleta.
+            <strong>Tão simples quanto um gesto de amor.</strong>
+          </p>
+
+          <!-- CTAs principais -->
+          <div class="hero-acoes entra d3" role="group" aria-label="Ações principais">
+            <a href="cartas.html" class="btn btn-ouro btn-gg hero-cta-principal">
+              <i class="bi bi-heart-fill" aria-hidden="true"></i>
+              Adotar uma Cartinha
+            </a>
+            <a href="sobre.html" class="btn btn-outline-branco btn-g">
+              Como funciona
+              <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <!-- Prova social com avatares -->
+          <div class="hero-prova entra d4" aria-label="Prova social">
+            <div class="hp-faces" aria-hidden="true">
+              <div class="hp-face" style="background:var(--azul)">M</div>
+              <div class="hp-face" style="background:var(--ouro-esc)">R</div>
+              <div class="hp-face" style="background:var(--postal-suav)">F</div>
+              <div class="hp-face" style="background:rgba(255,255,255,.18);font-size:.55rem">+</div>
             </div>
-            <div class="carimbo env-carimbo">Franca/SP · 2026</div>
+            <p><strong>412 doadores</strong> já realizaram sonhos este ano</p>
+          </div>
+
+          <!-- Garantias rápidas -->
+          <div class="hero-garantias entra d4" aria-label="Garantias">
+            <div class="hg-item">
+              <i class="bi bi-shield-fill-check" aria-hidden="true"></i>
+              <span>100% transparente</span>
+            </div>
+            <div class="hg-item">
+              <i class="bi bi-building-heart" aria-hidden="true"></i>
+              <span>5 instituições verificadas</span>
+            </div>
+            <div class="hg-item">
+              <i class="bi bi-gift-fill" aria-hidden="true"></i>
+              <span>Gratuito para participar</span>
+            </div>
           </div>
         </div>
 
-        <!-- Corpo do envelope -->
-        <div class="env-corpo">
-          <div class="env-remetente">
-            <span class="er-de">De:</span>
-            <span class="er-nome">Ana Luiza, 7 anos</span>
-            <span class="er-inst">ONG Raízes · Franca/SP</span>
+        <!-- COLUNA DIREITA — 38.2% — Envelope-carta animado -->
+        <div class="hero-envelope-wrap entra d2" aria-label="Exemplo de cartinha" role="presentation">
+
+          <!-- Fita de embrulho decorativa -->
+          <div class="envelope-fita" aria-hidden="true">
+            <div class="ef-h"></div>
+            <div class="ef-v"></div>
+            <div class="ef-laco">
+              <div class="ef-anel"></div>
+              <div class="ef-orelha ef-orelha-e"></div>
+              <div class="ef-orelha ef-orelha-d"></div>
+            </div>
           </div>
 
-          <!-- Papel pautado com a carta em Caveat -->
-          <div class="carta-papel" role="img" aria-label="Carta manuscrita da Ana Luiza">
-            <div class="cp-pauta" aria-hidden="true">
-              <span></span><span></span><span></span>
-              <span></span><span></span><span></span>
+          <!-- Envelope principal -->
+          <article class="envelope" aria-label="Cartinha de exemplo da Ana Luiza">
+            <!-- Aba SVG triangular -->
+            <div class="env-aba" aria-hidden="true">
+              <svg viewBox="0 0 380 70" xmlns="http://www.w3.org/2000/svg" class="env-aba-svg" aria-hidden="true">
+                <path d="M0 0 L380 0 L190 70 Z" fill="var(--papel-2)" />
+                <path d="M0 0 L380 0 L190 70 Z" fill="none" stroke="var(--pergaminho)" stroke-width="1.5" />
+              </svg>
+              <div class="env-selos" aria-hidden="true">
+                <div class="selo-postal">
+                  <div class="sp-borda"></div>
+                  <i class="bi bi-heart-fill sp-icone"></i>
+                  <span class="sp-val">AMOR</span>
+                </div>
+                <div class="carimbo env-carimbo">Franca/SP · 2026</div>
+              </div>
             </div>
-            <div class="cp-margem" aria-hidden="true"></div>
-            <div class="cp-conteudo">
-              <p class="t-carta cp-saudacao">Querido Papai Noel,</p>
-              <p class="t-carta cp-corpo">
-                eu nunca tive uma boneca só minha de verdade. Meu sonho é ter uma com cabelo comprido pra pentear e dar banho. Ia chamar ela de Princesa!
+
+            <!-- Corpo do envelope -->
+            <div class="env-corpo">
+              <div class="env-remetente">
+                <span class="er-de">De:</span>
+                <span class="er-nome">Ana Luiza, 7 anos</span>
+                <span class="er-inst">ONG Raízes · Franca/SP</span>
+              </div>
+
+              <!-- Papel pautado com a carta em Caveat -->
+              <div class="carta-papel" role="img" aria-label="Carta manuscrita da Ana Luiza">
+                <div class="cp-pauta" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="cp-margem" aria-hidden="true"></div>
+                <div class="cp-conteudo">
+                  <p class="t-carta cp-saudacao">Querido Papai Noel,</p>
+                  <p class="t-carta cp-corpo">
+                    eu nunca tive uma boneca só minha de verdade. Meu sonho é ter uma com cabelo comprido pra pentear e
+                    dar banho. Ia chamar ela de Princesa!
+                  </p>
+                  <p class="t-carta cp-assina">— Ana Luiza 💕</p>
+                </div>
+              </div>
+
+              <!-- Pedido destacado -->
+              <div class="env-pedido">
+                <i class="bi bi-gift-fill ep-icone" aria-hidden="true"></i>
+                <div>
+                  <span class="ep-rotulo">Pedido desta carta</span>
+                  <span class="ep-item">Bonecas e Acessórios</span>
+                </div>
+                <span class="badge badge-disp ep-status">Disponível</span>
+              </div>
+
+              <a href="cartas.html" class="btn btn-primario btn-full btn-g env-cta">
+                <i class="bi bi-heart-fill" aria-hidden="true"></i>
+                Realizar este Sonho
+              </a>
+
+              <p class="env-rodape" aria-hidden="true">
+                <i class="bi bi-shield-check"></i>
+                Explorar é gratuito · Sem compromisso
               </p>
-              <p class="t-carta cp-assina">— Ana Luiza 💕</p>
+            </div>
+          </article>
+
+          <!-- Estrelinhas orbitando o envelope -->
+          <span class="star-deco sd1" aria-hidden="true">✦</span>
+          <span class="star-deco sd2" aria-hidden="true">✧</span>
+          <span class="star-deco sd3" aria-hidden="true">✦</span>
+        </div>
+
+      </div><!-- /hero-grade -->
+
+      <!-- Indicador de scroll -->
+      <a href="#numeros" class="hero-scroll" aria-label="Rolar para ver estatísticas">
+        <div class="hs-fio" aria-hidden="true"></div>
+        <i class="bi bi-chevron-down" aria-hidden="true"></i>
+      </a>
+
+    </section>
+
+    <!-- ══ ATO 2 · IMPACTO — O peso do número ══════════════════ -->
+    <section class="barra-nums" id="numeros" aria-label="Estatísticas de impacto">
+      <div class="bn-timbramento" aria-hidden="true">
+        <span>✦</span>
+        <div class="bnt-linha"></div>
+        <span>IMPACTO REAL · FRANCA/SP · 2026</span>
+        <div class="bnt-linha"></div>
+        <span>✦</span>
+      </div>
+
+      <div class="container">
+        <div class="bn-grade" role="list">
+
+          <div class="bn-item entra" role="listitem">
+            <span class="bn-num" id="n-total" aria-label="crianças cadastradas">0</span>
+            <span class="bn-label">crianças<br />cadastradas</span>
+            <div class="bn-barra" aria-hidden="true">
+              <div class="bn-prog" style="width:74%"></div>
             </div>
           </div>
 
-          <!-- Pedido destacado -->
-          <div class="env-pedido">
-            <i class="bi bi-gift-fill ep-icone" aria-hidden="true"></i>
-            <div>
-              <span class="ep-rotulo">Pedido desta carta</span>
-              <span class="ep-item">Bonecas e Acessórios</span>
+          <div class="bn-div" aria-hidden="true"></div>
+
+          <div class="bn-item entra d1" role="listitem">
+            <span class="bn-num" id="n-adot" aria-label="sonhos adotados">0</span>
+            <span class="bn-label">sonhos<br />adotados</span>
+            <div class="bn-barra" aria-hidden="true">
+              <div class="bn-prog" style="width:74%"></div>
             </div>
-            <span class="badge badge-disp ep-status">Disponível</span>
           </div>
 
-          <a href="cartas.html" class="btn btn-primario btn-full btn-g env-cta">
-            <i class="bi bi-heart-fill" aria-hidden="true"></i>
-            Realizar este Sonho
-          </a>
+          <div class="bn-div" aria-hidden="true"></div>
 
-          <p class="env-rodape" aria-hidden="true">
-            <i class="bi bi-shield-check"></i>
-            Explorar é gratuito · Sem compromisso
+          <div class="bn-item entra d2" role="listitem">
+            <span class="bn-num" id="n-entr" aria-label="presentes entregues">0</span>
+            <span class="bn-label">presentes<br />entregues</span>
+            <div class="bn-barra" aria-hidden="true">
+              <div class="bn-prog" style="width:60%"></div>
+            </div>
+          </div>
+
+          <div class="bn-div" aria-hidden="true"></div>
+
+          <div class="bn-item entra d3" role="listitem">
+            <span class="bn-num" id="n-doad" aria-label="doadores solidários">0</span>
+            <span class="bn-label">doadores<br />solidários</span>
+            <div class="bn-barra" aria-hidden="true">
+              <div class="bn-prog" style="width:88%"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ ATO 3 · COMO FUNCIONA — O herói és você ══════════════ -->
+    <section class="secao como-funciona" id="como" aria-labelledby="titulo-como">
+      <div class="container">
+
+        <div class="tc secao-cabec entra">
+          <span class="tag"><i class="bi bi-envelope-heart" aria-hidden="true"></i> Simples como enviar uma carta</span>
+          <h2 class="t-secao" id="titulo-como" style="margin-top:var(--sp-3)">
+            3 passos para<br /><em>realizar um sonho</em>
+          </h2>
+          <div class="ornamento centro" aria-hidden="true"></div>
+          <p class="secao-desc">
+            Você não precisa de muito tempo nem de muito dinheiro. Só de vontade.
           </p>
         </div>
-      </article>
 
-      <!-- Estrelinhas orbitando o envelope -->
-      <span class="star-deco sd1" aria-hidden="true">✦</span>
-      <span class="star-deco sd2" aria-hidden="true">✧</span>
-      <span class="star-deco sd3" aria-hidden="true">✦</span>
-    </div>
+        <div class="passos-linha" role="list">
+          <!-- Trilho horizontal conectando passos -->
+          <div class="pl-trilho" aria-hidden="true"></div>
 
-  </div><!-- /hero-grade -->
-
-  <!-- Indicador de scroll -->
-  <a href="#numeros" class="hero-scroll" aria-label="Rolar para ver estatísticas">
-    <div class="hs-fio" aria-hidden="true"></div>
-    <i class="bi bi-chevron-down" aria-hidden="true"></i>
-  </a>
-
-</section>
-
-<!-- ══ ATO 2 · IMPACTO — O peso do número ══════════════════ -->
-<section class="barra-nums" id="numeros" aria-label="Estatísticas de impacto">
-  <div class="bn-timbramento" aria-hidden="true">
-    <span>✦</span>
-    <div class="bnt-linha"></div>
-    <span>IMPACTO REAL · FRANCA/SP · 2026</span>
-    <div class="bnt-linha"></div>
-    <span>✦</span>
-  </div>
-
-  <div class="container">
-    <div class="bn-grade" role="list">
-
-      <div class="bn-item entra" role="listitem">
-        <span class="bn-num" id="n-total" aria-label="crianças cadastradas">0</span>
-        <span class="bn-label">crianças<br/>cadastradas</span>
-        <div class="bn-barra" aria-hidden="true">
-          <div class="bn-prog" style="width:74%"></div>
-        </div>
-      </div>
-
-      <div class="bn-div" aria-hidden="true"></div>
-
-      <div class="bn-item entra d1" role="listitem">
-        <span class="bn-num" id="n-adot" aria-label="sonhos adotados">0</span>
-        <span class="bn-label">sonhos<br/>adotados</span>
-        <div class="bn-barra" aria-hidden="true">
-          <div class="bn-prog" style="width:74%"></div>
-        </div>
-      </div>
-
-      <div class="bn-div" aria-hidden="true"></div>
-
-      <div class="bn-item entra d2" role="listitem">
-        <span class="bn-num" id="n-entr" aria-label="presentes entregues">0</span>
-        <span class="bn-label">presentes<br/>entregues</span>
-        <div class="bn-barra" aria-hidden="true">
-          <div class="bn-prog" style="width:60%"></div>
-        </div>
-      </div>
-
-      <div class="bn-div" aria-hidden="true"></div>
-
-      <div class="bn-item entra d3" role="listitem">
-        <span class="bn-num" id="n-doad" aria-label="doadores solidários">0</span>
-        <span class="bn-label">doadores<br/>solidários</span>
-        <div class="bn-barra" aria-hidden="true">
-          <div class="bn-prog" style="width:88%"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ ATO 3 · COMO FUNCIONA — O herói és você ══════════════ -->
-<section class="secao como-funciona" id="como" aria-labelledby="titulo-como">
-  <div class="container">
-
-    <div class="tc secao-cabec entra">
-      <span class="tag"><i class="bi bi-envelope-heart" aria-hidden="true"></i> Simples como enviar uma carta</span>
-      <h2 class="t-secao" id="titulo-como" style="margin-top:var(--sp-3)">
-        3 passos para<br/><em>realizar um sonho</em>
-      </h2>
-      <div class="ornamento centro" aria-hidden="true"></div>
-      <p class="secao-desc">
-        Você não precisa de muito tempo nem de muito dinheiro. Só de vontade.
-      </p>
-    </div>
-
-    <div class="passos-linha" role="list">
-      <!-- Trilho horizontal conectando passos -->
-      <div class="pl-trilho" aria-hidden="true"></div>
-
-      <div class="passo entra d1" role="listitem">
-        <div class="passo-num" aria-hidden="true">01</div>
-        <div class="passo-icone" aria-hidden="true">
-          <i class="bi bi-search-heart-fill"></i>
-        </div>
-        <h3>Escolha uma Cartinha</h3>
-        <p>Navegue pelo mural e deixe uma história tocar você. Cada pedido foi escrito por uma criança real, com as próprias palavras dela.</p>
-        <a href="cartas.html" class="passo-link">
-          Ver o mural <i class="bi bi-arrow-right" aria-hidden="true"></i>
-        </a>
-      </div>
-
-      <div class="passo entra d2" role="listitem">
-        <div class="passo-num" aria-hidden="true">02</div>
-        <div class="passo-icone pi-ouro" aria-hidden="true">
-          <i class="bi bi-bag-heart-fill"></i>
-        </div>
-        <h3>Compre o Presente</h3>
-        <p>Compre exatamente o que a criança pediu. Muitos presentes custam menos de R$50 — cada gesto conta, sem valor mínimo.</p>
-        <div class="passo-tag" aria-label="Dica">
-          <i class="bi bi-lightbulb-fill" aria-hidden="true"></i>
-          Embrulhe com carinho!
-        </div>
-      </div>
-
-      <div class="passo entra d3" role="listitem">
-        <div class="passo-num" aria-hidden="true">03</div>
-        <div class="passo-icone pi-azul" aria-hidden="true">
-          <i class="bi bi-geo-alt-fill"></i>
-        </div>
-        <h3>Entregue no Ponto de Coleta</h3>
-        <p>5 pontos em Franca/SP. Nossa equipe faz a entrega com cuidado e você recebe confirmação quando a criança receber.</p>
-        <a href="cartas.html#pontos" class="passo-link" style="color:var(--azul)">
-          Ver pontos <i class="bi bi-arrow-right" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-
-    <!-- Faixa de garantias -->
-    <div class="sela-garantias entra" role="list" aria-label="Garantias do projeto">
-      <div class="sg-item" role="listitem">
-        <i class="bi bi-shield-fill-check" aria-hidden="true"></i>
-        <span>100% transparente</span>
-      </div>
-      <div class="sg-sep" aria-hidden="true"></div>
-      <div class="sg-item" role="listitem">
-        <i class="bi bi-building-heart" aria-hidden="true"></i>
-        <span>Instituições verificadas</span>
-      </div>
-      <div class="sg-sep" aria-hidden="true"></div>
-      <div class="sg-item" role="listitem">
-        <i class="bi bi-people-fill" aria-hidden="true"></i>
-        <span>Equipe 100% voluntária</span>
-      </div>
-      <div class="sg-sep" aria-hidden="true"></div>
-      <div class="sg-item" role="listitem">
-        <i class="bi bi-heart-fill" aria-hidden="true"></i>
-        <span>Cada criança recebe de verdade</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ ATO 4 · CARTINHAS — Prova do mural ══════════════════ -->
-<section class="secao secao-cartinhas" id="cartinhas" style="background:var(--papel-2)" aria-labelledby="titulo-cartinhas">
-  <div class="container">
-
-    <div class="sc-cabecalho entra">
-      <div>
-        <span class="tag tag-ouro">
-          <i class="bi bi-clock-fill" aria-hidden="true"></i>
-          Aguardando agora
-        </span>
-        <h2 class="t-secao" id="titulo-cartinhas" style="margin-top:var(--sp-2)">
-          Cartinhas <em>disponíveis</em>
-        </h2>
-        <div class="ornamento ouro" aria-hidden="true"></div>
-      </div>
-      <a href="cartas.html" class="btn btn-outline btn-m">
-        Ver todas <i class="bi bi-arrow-right" aria-hidden="true"></i>
-      </a>
-    </div>
-
-    <!-- Grade de cartinhas — preenchida pelo index.js -->
-    <div class="sc-grade" id="grid-home" aria-live="polite" aria-label="Cartinhas disponíveis">
-      <div class="sc-load">
-        <div class="spinner" style="color:var(--postal);width:32px;height:32px;border-width:3px" aria-hidden="true"></div>
-        <p>Carregando cartinhas…</p>
-      </div>
-    </div>
-
-    <div class="sc-rodape tc entra">
-      <p>Há <strong id="n-disp" class="sc-destaque">…</strong> cartinhas esperando por você agora.</p>
-      <a href="cartas.html" class="btn btn-primario btn-g" style="margin-top:var(--sp-3)">
-        <i class="bi bi-heart-fill" aria-hidden="true"></i>
-        Ver todas e adotar
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══ INTERMEZZO — "Um presente é mais que um objeto" ══════ -->
-<section class="secao-emocional" aria-labelledby="titulo-emocional">
-  <div class="se-fundo" aria-hidden="true">
-    <img src="./fundo/fundo-impacto.png" alt="" loading="lazy"/>
-    <div class="se-manto"></div>
-    <div class="se-grade"></div>
-  </div>
-
-  <div class="container-lg se-conteudo">
-    <figure class="se-mascote entra" aria-hidden="true">
-      <img src="./imagens_sobre/rena33.png" alt=""/>
-    </figure>
-
-    <div class="se-texto entra d2">
-      <span class="tag tag-branco">Por que um presente muda uma vida</span>
-      <h2 class="se-titulo" id="titulo-emocional">
-        Para uma criança<br/>em vulnerabilidade,<br/>
-        <em>receber um presente<br/>é ouvir: "Você importa."</em>
-      </h2>
-      <p class="se-corpo">
-        Não é sobre o objeto em si. É sobre a mensagem que ele carrega.
-        <strong>Para milhares de crianças brasileiras, esse gesto pode ser
-        o mais significativo que alguém já fez por elas.</strong>
-      </p>
-
-      <!-- Stats rápidos contextuais -->
-      <div class="se-stats" aria-label="Dados de impacto">
-        <div class="ss-item">
-          <strong>74%</strong>
-          <span>das cartinhas são adotadas</span>
-        </div>
-        <div class="ss-sep" aria-hidden="true"></div>
-        <div class="ss-item">
-          <strong>5</strong>
-          <span>instituições parceiras</span>
-        </div>
-        <div class="ss-sep" aria-hidden="true"></div>
-        <div class="ss-item">
-          <strong>100%</strong>
-          <span>voluntário e gratuito</span>
-        </div>
-      </div>
-
-      <div class="se-acoes">
-        <a href="login.html" class="btn btn-ouro btn-g">
-          <i class="bi bi-person-plus-fill" aria-hidden="true"></i>
-          Quero ser doador
-        </a>
-        <a href="impacto.html" class="btn btn-outline-branco btn-g">
-          Ver o impacto real
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ DEPOIMENTOS — Histórias que aquecem ════════════════ -->
-<section class="secao secao-dep" style="background:var(--branco-quente)" aria-labelledby="titulo-dep">
-  <div class="container">
-
-    <div class="tc entra" style="margin-bottom:var(--sp-5)">
-      <span class="tag">Quem já viveu esta experiência</span>
-      <h2 class="t-secao" id="titulo-dep" style="margin-top:var(--sp-2)">
-        Histórias que <em>aquecem</em>
-      </h2>
-    </div>
-
-    <div class="dep-grade" role="list">
-
-      <article class="dep-carta entra d1" role="listitem">
-        <div class="dc-canto dc-tl" aria-hidden="true"></div>
-        <div class="dc-canto dc-tr" aria-hidden="true"></div>
-        <p class="dc-aspas" aria-hidden="true">"</p>
-        <blockquote class="dc-texto">
-          Adotei a cartinha da Valentina. Quando soube que ela foi à escola abraçando os livros novos, chorei igual criança. Vou adotar toda campanha pelo resto da vida.
-        </blockquote>
-        <footer class="dc-autor">
-          <div class="dc-av" style="background:var(--postal-pale);color:var(--postal)" aria-hidden="true">M</div>
-          <div>
-            <strong>Mariana Costa</strong>
-            <span>Doadora — 3 cartinhas em 2025</span>
+          <div class="passo entra d1" role="listitem">
+            <div class="passo-num" aria-hidden="true">01</div>
+            <div class="passo-icone" aria-hidden="true">
+              <i class="bi bi-search-heart-fill"></i>
+            </div>
+            <h3>Escolha uma Cartinha</h3>
+            <p>Navegue pelo mural e deixe uma história tocar você. Cada pedido foi escrito por uma criança real, com as
+              próprias palavras dela.</p>
+            <a href="cartas.html" class="passo-link">
+              Ver o mural <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </a>
           </div>
-        </footer>
-      </article>
 
-      <article class="dep-carta entra d2" role="listitem">
-        <div class="dc-canto dc-tl" aria-hidden="true"></div>
-        <div class="dc-canto dc-tr" aria-hidden="true"></div>
-        <p class="dc-aspas" style="color:var(--ouro)" aria-hidden="true">"</p>
-        <blockquote class="dc-texto">
-          Nossa instituição cadastrou 12 crianças e todas foram adotadas em 15 dias! A plataforma facilitou tudo. As crianças ficaram eufóricas com a notícia.
-        </blockquote>
-        <footer class="dc-autor">
-          <div class="dc-av" style="background:var(--ouro-pale);color:var(--ouro-esc)" aria-hidden="true">R</div>
-          <div>
-            <strong>Rosângela Ferreira</strong>
-            <span>Coord. ONG Raízes · Franca/SP</span>
+          <div class="passo entra d2" role="listitem">
+            <div class="passo-num" aria-hidden="true">02</div>
+            <div class="passo-icone pi-ouro" aria-hidden="true">
+              <i class="bi bi-bag-heart-fill"></i>
+            </div>
+            <h3>Compre o Presente</h3>
+            <p>Compre exatamente o que a criança pediu. Muitos presentes custam menos de R$50 — cada gesto conta, sem
+              valor mínimo.</p>
+            <div class="passo-tag" aria-label="Dica">
+              <i class="bi bi-lightbulb-fill" aria-hidden="true"></i>
+              Embrulhe com carinho!
+            </div>
           </div>
-        </footer>
-      </article>
 
-      <article class="dep-carta entra d3" role="listitem">
-        <div class="dc-canto dc-tl" aria-hidden="true"></div>
-        <div class="dc-canto dc-tr" aria-hidden="true"></div>
-        <p class="dc-aspas" style="color:var(--azul-claro)" aria-hidden="true">"</p>
-        <blockquote class="dc-texto">
-          Fiz com meus filhos para ensiná-los sobre solidariedade. Experiência linda. Minha filha de 8 anos já pergunta quando vamos adotar a próxima.
-        </blockquote>
-        <footer class="dc-autor">
-          <div class="dc-av" style="background:var(--papel-2);color:var(--tinta-suave)" aria-hidden="true">F</div>
-          <div>
-            <strong>Felipe Andrade</strong>
-            <span>Doador e pai de família</span>
+          <div class="passo entra d3" role="listitem">
+            <div class="passo-num" aria-hidden="true">03</div>
+            <div class="passo-icone pi-azul" aria-hidden="true">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <h3>Entregue no Ponto de Coleta</h3>
+            <p>5 pontos em Franca/SP. Nossa equipe faz a entrega com cuidado e você recebe confirmação quando a criança
+              receber.</p>
+            <a href="cartas.html#pontos" class="passo-link" style="color:var(--azul)">
+              Ver pontos <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </a>
           </div>
-        </footer>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ PARCEIROS ════════════════════════════════════════════ -->
-<section class="secao-sm secao-parceiros" style="background:var(--papel-2)" aria-labelledby="titulo-parceiros">
-  <div class="container tc">
-    <p class="parc-titulo entra" id="titulo-parceiros">Instituições parceiras verificadas</p>
-    <div class="parc-grade entra d1" role="list" aria-label="Instituições parceiras">
-      <div class="parc-item" role="listitem">
-        <i class="bi bi-building-heart" aria-hidden="true"></i>
-        <span>ONG Raízes</span>
-      </div>
-      <div class="parc-item" role="listitem">
-        <i class="bi bi-building-heart" aria-hidden="true"></i>
-        <span>Pastoral do Menor</span>
-      </div>
-      <div class="parc-item" role="listitem">
-        <i class="bi bi-building-heart" aria-hidden="true"></i>
-        <span>Lar Esperança</span>
-      </div>
-      <div class="parc-item" role="listitem">
-        <i class="bi bi-building-heart" aria-hidden="true"></i>
-        <span>Casa da Criança</span>
-      </div>
-      <div class="parc-item" role="listitem">
-        <i class="bi bi-building-heart" aria-hidden="true"></i>
-        <span>Abrigo Sol Nascente</span>
-      </div>
-    </div>
-    <p class="parc-rodape entra d2">
-      É uma instituição?
-      <a href="login.html">Cadastre-se e faça parte</a>
-    </p>
-  </div>
-</section>
-
-<!-- ══ ATO 5 · CTA FINAL — Chamada à ação ══════════════════ -->
-<section class="cta-final" aria-labelledby="titulo-cta">
-  <div class="cf-fundo" aria-hidden="true"></div>
-  <!-- Linha de luz superior -->
-  <div class="cf-luz" aria-hidden="true"></div>
-
-  <div class="container tc">
-    <div class="cf-conteudo entra">
-
-      <!-- Selos decorativos -->
-      <div class="cf-selos" aria-hidden="true">
-        <div class="cf-selo">
-          <div class="cfs-borda"></div>
-          <i class="bi bi-heart-fill"></i>
-          <span>AMOR</span>
         </div>
-        <div class="cf-laco"></div>
-        <div class="cf-selo">
-          <div class="cfs-borda"></div>
-          <i class="bi bi-gift-fill"></i>
-          <span>SONHO</span>
+
+        <!-- Faixa de garantias -->
+        <div class="sela-garantias entra" role="list" aria-label="Garantias do projeto">
+          <div class="sg-item" role="listitem">
+            <i class="bi bi-shield-fill-check" aria-hidden="true"></i>
+            <span>100% transparente</span>
+          </div>
+          <div class="sg-sep" aria-hidden="true"></div>
+          <div class="sg-item" role="listitem">
+            <i class="bi bi-building-heart" aria-hidden="true"></i>
+            <span>Instituições verificadas</span>
+          </div>
+          <div class="sg-sep" aria-hidden="true"></div>
+          <div class="sg-item" role="listitem">
+            <i class="bi bi-people-fill" aria-hidden="true"></i>
+            <span>Equipe 100% voluntária</span>
+          </div>
+          <div class="sg-sep" aria-hidden="true"></div>
+          <div class="sg-item" role="listitem">
+            <i class="bi bi-heart-fill" aria-hidden="true"></i>
+            <span>Cada criança recebe de verdade</span>
+          </div>
         </div>
       </div>
+    </section>
 
-      <h2 class="cf-titulo" id="titulo-cta">
-        Uma cartinha.<br/>
-        Um presente.<br/>
-        <em>Uma infância<br/>transformada.</em>
-      </h2>
+    <!-- ══ ATO 4 · CARTINHAS — Prova do mural ══════════════════ -->
+    <section class="secao secao-cartinhas" id="cartinhas" style="background:var(--papel-2)"
+      aria-labelledby="titulo-cartinhas">
+      <div class="container">
 
-      <p class="cf-desc">
-        Cada adoção é um ato de amor que chega onde mais precisa.
-        Seja o herói da história de uma criança hoje.
-      </p>
+        <div class="sc-cabecalho entra">
+          <div>
+            <span class="tag tag-ouro">
+              <i class="bi bi-clock-fill" aria-hidden="true"></i>
+              Aguardando agora
+            </span>
+            <h2 class="t-secao" id="titulo-cartinhas" style="margin-top:var(--sp-2)">
+              Cartinhas <em>disponíveis</em>
+            </h2>
+            <div class="ornamento ouro" aria-hidden="true"></div>
+          </div>
+          <a href="cartas.html" class="btn btn-outline btn-m">
+            Ver todas <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
 
-      <a href="cartas.html" class="btn btn-ouro btn-gg cf-btn">
-        <i class="bi bi-heart-fill" aria-hidden="true"></i>
-        Escolher uma Cartinha Agora
-      </a>
+        <!-- Grade de cartinhas — preenchida pelo index.js -->
+        <div class="sc-grade" id="grid-home" aria-live="polite" aria-label="Cartinhas disponíveis">
+          <div class="sc-load">
+            <div class="spinner" style="color:var(--postal);width:32px;height:32px;border-width:3px" aria-hidden="true">
+            </div>
+            <p>Carregando cartinhas…</p>
+          </div>
+        </div>
 
-      <p class="cf-nota">
-        <i class="bi bi-shield-check" style="color:var(--ouro-vivo)" aria-hidden="true"></i>
-        Gratuito · Transparente · Transformador
-      </p>
+        <div class="sc-rodape tc entra">
+          <p>Há <strong id="n-disp" class="sc-destaque">…</strong> cartinhas esperando por você agora.</p>
+          <a href="cartas.html" class="btn btn-primario btn-g" style="margin-top:var(--sp-3)">
+            <i class="bi bi-heart-fill" aria-hidden="true"></i>
+            Ver todas e adotar
+          </a>
+        </div>
 
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
 
-</main>
+    <!-- ══ INTERMEZZO — "Um presente é mais que um objeto" ══════ -->
+    <section class="secao-emocional" aria-labelledby="titulo-emocional">
+      <div class="se-fundo" aria-hidden="true">
+        <img src="./fundo/fundo-impacto.png" alt="" loading="lazy" />
+        <div class="se-manto"></div>
+        <div class="se-grade"></div>
+      </div>
 
-<div data-partial="footer"></div>
+      <div class="container-lg se-conteudo">
+        <figure class="se-mascote entra" aria-hidden="true">
+          <img src="./imagens_sobre/rena33.png" alt="" />
+        </figure>
 
-<script src="./script/core.js" defer></script>
-<script src="./script/partial.js" defer></script>
-<script src="./script/index.js" defer></script>
+        <div class="se-texto entra d2">
+          <span class="tag tag-branco">Por que um presente muda uma vida</span>
+          <h2 class="se-titulo" id="titulo-emocional">
+            Para uma criança<br />em vulnerabilidade,<br />
+            <em>receber um presente<br />é ouvir: "Você importa."</em>
+          </h2>
+          <p class="se-corpo">
+            Não é sobre o objeto em si. É sobre a mensagem que ele carrega.
+            <strong>Para milhares de crianças brasileiras, esse gesto pode ser
+              o mais significativo que alguém já fez por elas.</strong>
+          </p>
+
+          <!-- Stats rápidos contextuais -->
+          <div class="se-stats" aria-label="Dados de impacto">
+            <div class="ss-item">
+              <strong>74%</strong>
+              <span>das cartinhas são adotadas</span>
+            </div>
+            <div class="ss-sep" aria-hidden="true"></div>
+            <div class="ss-item">
+              <strong>5</strong>
+              <span>instituições parceiras</span>
+            </div>
+            <div class="ss-sep" aria-hidden="true"></div>
+            <div class="ss-item">
+              <strong>100%</strong>
+              <span>voluntário e gratuito</span>
+            </div>
+          </div>
+
+          <div class="se-acoes">
+            <a href="login.html" class="btn btn-ouro btn-g">
+              <i class="bi bi-person-plus-fill" aria-hidden="true"></i>
+              Quero ser doador
+            </a>
+            <a href="impacto.html" class="btn btn-outline-branco btn-g">
+              Ver o impacto real
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ DEPOIMENTOS — Histórias que aquecem ════════════════ -->
+    <section class="secao secao-dep" style="background:var(--branco-quente)" aria-labelledby="titulo-dep">
+      <div class="container">
+
+        <div class="tc entra" style="margin-bottom:var(--sp-5)">
+          <span class="tag">Quem já viveu esta experiência</span>
+          <h2 class="t-secao" id="titulo-dep" style="margin-top:var(--sp-2)">
+            Histórias que <em>aquecem</em>
+          </h2>
+        </div>
+
+        <div class="dep-grade" role="list">
+
+          <article class="dep-carta entra d1" role="listitem">
+            <div class="dc-canto dc-tl" aria-hidden="true"></div>
+            <div class="dc-canto dc-tr" aria-hidden="true"></div>
+            <p class="dc-aspas" aria-hidden="true">"</p>
+            <blockquote class="dc-texto">
+              Adotei a cartinha da Valentina. Quando soube que ela foi à escola abraçando os livros novos, chorei igual
+              criança. Vou adotar toda campanha pelo resto da vida.
+            </blockquote>
+            <footer class="dc-autor">
+              <div class="dc-av" style="background:var(--postal-pale);color:var(--postal)" aria-hidden="true">M</div>
+              <div>
+                <strong>Mariana Costa</strong>
+                <span>Doadora — 3 cartinhas em 2025</span>
+              </div>
+            </footer>
+          </article>
+
+          <article class="dep-carta entra d2" role="listitem">
+            <div class="dc-canto dc-tl" aria-hidden="true"></div>
+            <div class="dc-canto dc-tr" aria-hidden="true"></div>
+            <p class="dc-aspas" style="color:var(--ouro)" aria-hidden="true">"</p>
+            <blockquote class="dc-texto">
+              Nossa instituição cadastrou 12 crianças e todas foram adotadas em 15 dias! A plataforma facilitou tudo. As
+              crianças ficaram eufóricas com a notícia.
+            </blockquote>
+            <footer class="dc-autor">
+              <div class="dc-av" style="background:var(--ouro-pale);color:var(--ouro-esc)" aria-hidden="true">R</div>
+              <div>
+                <strong>Rosângela Ferreira</strong>
+                <span>Coord. ONG Raízes · Franca/SP</span>
+              </div>
+            </footer>
+          </article>
+
+          <article class="dep-carta entra d3" role="listitem">
+            <div class="dc-canto dc-tl" aria-hidden="true"></div>
+            <div class="dc-canto dc-tr" aria-hidden="true"></div>
+            <p class="dc-aspas" style="color:var(--azul-claro)" aria-hidden="true">"</p>
+            <blockquote class="dc-texto">
+              Fiz com meus filhos para ensiná-los sobre solidariedade. Experiência linda. Minha filha de 8 anos já
+              pergunta quando vamos adotar a próxima.
+            </blockquote>
+            <footer class="dc-autor">
+              <div class="dc-av" style="background:var(--papel-2);color:var(--tinta-suave)" aria-hidden="true">F</div>
+              <div>
+                <strong>Felipe Andrade</strong>
+                <span>Doador e pai de família</span>
+              </div>
+            </footer>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ PARCEIROS ════════════════════════════════════════════ -->
+    <section class="secao-sm secao-parceiros" style="background:var(--papel-2)" aria-labelledby="titulo-parceiros">
+      <div class="container tc">
+        <p class="parc-titulo entra" id="titulo-parceiros">Instituições parceiras verificadas</p>
+        <div class="parc-grade entra d1" role="list" aria-label="Instituições parceiras">
+          <div class="parc-item" role="listitem">
+            <i class="bi bi-building-heart" aria-hidden="true"></i>
+            <span>ONG Raízes</span>
+          </div>
+          <div class="parc-item" role="listitem">
+            <i class="bi bi-building-heart" aria-hidden="true"></i>
+            <span>Pastoral do Menor</span>
+          </div>
+          <div class="parc-item" role="listitem">
+            <i class="bi bi-building-heart" aria-hidden="true"></i>
+            <span>Lar Esperança</span>
+          </div>
+          <div class="parc-item" role="listitem">
+            <i class="bi bi-building-heart" aria-hidden="true"></i>
+            <span>Casa da Criança</span>
+          </div>
+          <div class="parc-item" role="listitem">
+            <i class="bi bi-building-heart" aria-hidden="true"></i>
+            <span>Abrigo Sol Nascente</span>
+          </div>
+        </div>
+        <p class="parc-rodape entra d2">
+          É uma instituição?
+          <a href="login.html">Cadastre-se e faça parte</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ══ ATO 5 · CTA FINAL — Chamada à ação ══════════════════ -->
+    <section class="cta-final" aria-labelledby="titulo-cta">
+      <div class="cf-fundo" aria-hidden="true"></div>
+      <!-- Linha de luz superior -->
+      <div class="cf-luz" aria-hidden="true"></div>
+
+      <div class="container tc">
+        <div class="cf-conteudo entra">
+
+          <!-- Selos decorativos -->
+          <div class="cf-selos" aria-hidden="true">
+            <div class="cf-selo">
+              <div class="cfs-borda"></div>
+              <i class="bi bi-heart-fill"></i>
+              <span>AMOR</span>
+            </div>
+            <div class="cf-laco"></div>
+            <div class="cf-selo">
+              <div class="cfs-borda"></div>
+              <i class="bi bi-gift-fill"></i>
+              <span>SONHO</span>
+            </div>
+          </div>
+
+          <h2 class="cf-titulo" id="titulo-cta">
+            Uma cartinha.<br />
+            Um presente.<br />
+            <em>Uma infância<br />transformada.</em>
+          </h2>
+
+          <p class="cf-desc">
+            Cada adoção é um ato de amor que chega onde mais precisa.
+            Seja o herói da história de uma criança hoje.
+          </p>
+
+          <a href="cartas.html" class="btn btn-ouro btn-gg cf-btn">
+            <i class="bi bi-heart-fill" aria-hidden="true"></i>
+            Escolher uma Cartinha Agora
+          </a>
+
+          <p class="cf-nota">
+            <i class="bi bi-shield-check" style="color:var(--ouro-vivo)" aria-hidden="true"></i>
+            Gratuito · Transparente · Transformador
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-partial="footer"></div>
+
+  <script src="./script/core.js" defer></script>
+  <script src="./script/partial.js" defer></script>
+  <script src="./script/index.js" defer></script>
 </body>
+
 </html>

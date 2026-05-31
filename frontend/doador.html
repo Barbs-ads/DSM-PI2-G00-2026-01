@@ -1,178 +1,184 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="robots" content="noindex"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>Minha Conta | Conectando Sonhos</title>
-  <link rel="shortcut icon" href="./logotipo/favicon.ico"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
-  <link rel="stylesheet" href="./style/design-system.css"/>
-  <link rel="stylesheet" href="./style/inner-pages.css"/>
+  <link rel="shortcut icon" href="./logotipo/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="./style/design-system.css" />
+  <link rel="stylesheet" href="./style/inner-pages.css" />
 </head>
+
 <body>
 
-<a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
 
-<header class="site-header" id="site-header" role="banner">
-  <a href="index.html" class="logo-link" aria-label="Conectando Sonhos — Página inicial">
-    <img src="./logotipo/logotipo.png" alt="" width="36" height="36"/>
-    <div>
-      <span class="logo-nome">Conectando Sonhos</span>
-      <span class="logo-sub">Área do Doador</span>
-    </div>
-  </a>
-  <nav class="nav-links" id="nav-menu" aria-label="Navegação principal">
-    <a href="index.html">Início</a>
-    <a href="cartas.html">Cartinhas</a>
-    <a href="impacto.html">Impacto</a>
-  </nav>
-  <div id="nav-usuario" class="nav-usuario" aria-label="Área do usuário"></div>
-  <button class="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
-    <span></span><span></span><span></span>
-  </button>
-</header>
-
-<div class="dashboard" id="conteudo">
-
-  <aside class="sidebar" aria-label="Navegação da conta">
-    <div class="sb-user">
-      <div class="sb-av" id="sb-av" aria-hidden="true">D</div>
-      <div class="sb-info">
-        <strong id="sb-nome">Doador</strong>
-        <span>Doador Solidário</span>
+  <header class="site-header" id="site-header" role="banner">
+    <a href="index.html" class="logo-link" aria-label="Conectando Sonhos — Página inicial">
+      <img src="./logotipo/logotipo.png" alt="" width="36" height="36" />
+      <div>
+        <span class="logo-nome">Conectando Sonhos</span>
+        <span class="logo-sub">Área do Doador</span>
       </div>
-    </div>
-
-    <nav class="sb-nav" aria-label="Seções da conta">
-      <button type="button" class="sb-link ativo" data-panel="cartinhas" aria-current="page">
-        <i class="bi bi-heart-fill" aria-hidden="true"></i> Minhas Cartinhas
-      </button>
-      <button type="button" class="sb-link" data-panel="perfil">
-        <i class="bi bi-person-fill" aria-hidden="true"></i> Meu Perfil
-      </button>
-      <a href="cartas.html" class="sb-link">
-        <i class="bi bi-plus-circle-fill" aria-hidden="true"></i> Adotar nova cartinha
-      </a>
-      <button type="button" class="sb-link perigo" data-action="logout">
-        <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
-      </button>
+    </a>
+    <nav class="nav-links" id="nav-menu" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="cartas.html">Cartinhas</a>
+      <a href="impacto.html">Impacto</a>
     </nav>
-  </aside>
-
-  <main class="dash-main">
-
-    <!-- ═══ PAINEL · CARTINHAS ═══════════════════════════ -->
-    <section class="dash-panel ativo" id="panel-cartinhas" aria-labelledby="t-cartinhas">
-      <div class="dash-hdr">
-        <h1 id="t-cartinhas">
-          Minhas Cartinhas
-          <span class="dash-badge" id="badge-tot" aria-label="Total">0</span>
-        </h1>
-        <a href="cartas.html" class="btn btn-primario btn-sm">
-          <i class="bi bi-plus" aria-hidden="true"></i> Adotar mais
-        </a>
-      </div>
-
-      <div class="res-grade" role="list" aria-label="Resumo das cartinhas">
-        <div class="res-card" role="listitem">
-          <i class="bi bi-heart-fill" style="color:var(--postal)" aria-hidden="true"></i>
-          <div class="res-n" id="r-adot">0</div>
-          <div class="res-l">Adotadas</div>
-        </div>
-        <div class="res-card" role="listitem">
-          <i class="bi bi-gift-fill" style="color:var(--ouro)" aria-hidden="true"></i>
-          <div class="res-n" id="r-entr">0</div>
-          <div class="res-l">Entregues</div>
-        </div>
-        <div class="res-card" role="listitem">
-          <i class="bi bi-hourglass-split" style="color:var(--ouro-esc)" aria-hidden="true"></i>
-          <div class="res-n" id="r-pend">0</div>
-          <div class="res-l">Pendentes</div>
-        </div>
-      </div>
-
-      <div class="lista-d" id="lista-d" aria-live="polite">
-        <div class="lista-load">
-          <div class="spinner" style="color:var(--postal);width:32px;height:32px;border-width:3px" aria-hidden="true"></div>
-          <p>Carregando…</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ PAINEL · PERFIL ══════════════════════════════ -->
-    <section class="dash-panel" id="panel-perfil" aria-labelledby="t-perfil">
-      <div class="dash-hdr">
-        <h1 id="t-perfil">Meu Perfil</h1>
-      </div>
-
-      <div class="form-bloco2">
-        <h2>Dados pessoais</h2>
-        <p>Atualize suas informações de cadastro a qualquer momento.</p>
-
-        <form id="form-perfil" novalidate>
-          <div class="grid-campos g2">
-            <div class="campo-wrap">
-              <label class="campo-label" for="p-nome">Nome</label>
-              <input type="text" class="campo-input" id="p-nome" placeholder="Seu nome" autocomplete="name"/>
-            </div>
-            <div class="campo-wrap">
-              <label class="campo-label" for="p-email">E-mail</label>
-              <input type="email" class="campo-input" id="p-email" readonly
-                     style="background:var(--pergaminho);cursor:not-allowed"
-                     aria-describedby="p-email-hint"/>
-              <span id="p-email-hint" class="campo-hint">E-mail não pode ser alterado.</span>
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-primario">
-            <i class="bi bi-check-lg" aria-hidden="true"></i> Salvar alterações
-          </button>
-        </form>
-      </div>
-    </section>
-
-  </main>
-</div>
-
-<div class="toasts" role="status" aria-live="polite" aria-atomic="false"></div>
-
-<dialog id="modal-leitura" class="modal-postal" aria-labelledby="modal-tit">
-  <div class="modal-corpo form-bloco2" style="position: relative; max-width: 500px; margin: auto;">
-    <button type="button" class="btn btn-ghost btn-p" onclick="fecharModal()" aria-label="Fechar" style="position: absolute; top: var(--sp-2); right: var(--sp-2);">
-      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    <div id="nav-usuario" class="nav-usuario" aria-label="Área do usuário"></div>
+    <button class="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
     </button>
-    <div class="carimbo mb-3">Conectando Sonhos</div>
-    <h2 id="modal-tit" style="font-family: var(--f-display); color: var(--tinta);"></h2>
-    <div class="tag tag-ouro mb-3" id="modal-tag"></div>
-    <p id="modal-txt" class="t-carta" style="font-size: 1.2rem; line-height: 1.8; color: var(--tinta-medio);"></p>
+  </header>
+
+  <div class="dashboard" id="conteudo">
+
+    <aside class="sidebar" aria-label="Navegação da conta">
+      <div class="sb-user">
+        <div class="sb-av" id="sb-av" aria-hidden="true">D</div>
+        <div class="sb-info">
+          <strong id="sb-nome">Doador</strong>
+          <span>Doador Solidário</span>
+        </div>
+      </div>
+
+      <nav class="sb-nav" aria-label="Seções da conta">
+        <button type="button" class="sb-link ativo" data-panel="cartinhas" aria-current="page">
+          <i class="bi bi-heart-fill" aria-hidden="true"></i> Minhas Cartinhas
+        </button>
+        <button type="button" class="sb-link" data-panel="perfil">
+          <i class="bi bi-person-fill" aria-hidden="true"></i> Meu Perfil
+        </button>
+        <a href="cartas.html" class="sb-link">
+          <i class="bi bi-plus-circle-fill" aria-hidden="true"></i> Adotar nova cartinha
+        </a>
+        <button type="button" class="sb-link perigo" data-action="logout">
+          <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
+        </button>
+      </nav>
+    </aside>
+
+    <main class="dash-main">
+
+      <!-- ═══ PAINEL · CARTINHAS ═══════════════════════════ -->
+      <section class="dash-panel ativo" id="panel-cartinhas" aria-labelledby="t-cartinhas">
+        <div class="dash-hdr">
+          <h1 id="t-cartinhas">
+            Minhas Cartinhas
+            <span class="dash-badge" id="badge-tot" aria-label="Total">0</span>
+          </h1>
+          <a href="cartas.html" class="btn btn-primario btn-sm">
+            <i class="bi bi-plus" aria-hidden="true"></i> Adotar mais
+          </a>
+        </div>
+
+        <div class="res-grade" role="list" aria-label="Resumo das cartinhas">
+          <div class="res-card" role="listitem">
+            <i class="bi bi-heart-fill" style="color:var(--postal)" aria-hidden="true"></i>
+            <div class="res-n" id="r-adot">0</div>
+            <div class="res-l">Adotadas</div>
+          </div>
+          <div class="res-card" role="listitem">
+            <i class="bi bi-gift-fill" style="color:var(--ouro)" aria-hidden="true"></i>
+            <div class="res-n" id="r-entr">0</div>
+            <div class="res-l">Entregues</div>
+          </div>
+          <div class="res-card" role="listitem">
+            <i class="bi bi-hourglass-split" style="color:var(--ouro-esc)" aria-hidden="true"></i>
+            <div class="res-n" id="r-pend">0</div>
+            <div class="res-l">Pendentes</div>
+          </div>
+        </div>
+
+        <div class="lista-d" id="lista-d" aria-live="polite">
+          <div class="lista-load">
+            <div class="spinner" style="color:var(--postal);width:32px;height:32px;border-width:3px" aria-hidden="true">
+            </div>
+            <p>Carregando…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ PAINEL · PERFIL ══════════════════════════════ -->
+      <section class="dash-panel" id="panel-perfil" aria-labelledby="t-perfil">
+        <div class="dash-hdr">
+          <h1 id="t-perfil">Meu Perfil</h1>
+        </div>
+
+        <div class="form-bloco2">
+          <h2>Dados pessoais</h2>
+          <p>Atualize suas informações de cadastro a qualquer momento.</p>
+
+          <form id="form-perfil" novalidate>
+            <div class="grid-campos g2">
+              <div class="campo-wrap">
+                <label class="campo-label" for="p-nome">Nome</label>
+                <input type="text" class="campo-input" id="p-nome" placeholder="Seu nome" autocomplete="name" />
+              </div>
+              <div class="campo-wrap">
+                <label class="campo-label" for="p-email">E-mail</label>
+                <input type="email" class="campo-input" id="p-email" readonly
+                  style="background:var(--pergaminho);cursor:not-allowed" aria-describedby="p-email-hint" />
+                <span id="p-email-hint" class="campo-hint">E-mail não pode ser alterado.</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primario">
+              <i class="bi bi-check-lg" aria-hidden="true"></i> Salvar alterações
+            </button>
+          </form>
+        </div>
+      </section>
+
+    </main>
   </div>
-</dialog>
 
-<style>
-  /* CSS rápido para o comportamento do Modal nativo do HTML */
-  .modal-postal {
-    border: none;
-    background: transparent;
-    padding: var(--sp-4);
-    width: 100%;
-    max-width: 100vw;
-  }
-  .modal-postal::backdrop {
-    background: rgba(26, 39, 68, 0.7); /* Azul postal com transparência */
-    backdrop-filter: blur(4px);
-  }
-</style>
+  <div class="toasts" role="status" aria-live="polite" aria-atomic="false"></div>
 
-<script src="./script/core.js" defer></script>
-<script src="./script/dashboard.js" defer></script>
-<script>
-  /* Inicializa header em página com layout customizado (sem partial) */
-  document.addEventListener('DOMContentLoaded', () => {
-    if (typeof initMenu === 'function') initMenu();
-  });
-</script>
+  <dialog id="modal-leitura" class="modal-postal" aria-labelledby="modal-tit">
+    <div class="modal-corpo form-bloco2" style="position: relative; max-width: 500px; margin: auto;">
+      <button type="button" class="btn btn-ghost btn-p" onclick="fecharModal()" aria-label="Fechar"
+        style="position: absolute; top: var(--sp-2); right: var(--sp-2);">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+      <div class="carimbo mb-3">Conectando Sonhos</div>
+      <h2 id="modal-tit" style="font-family: var(--f-display); color: var(--tinta);"></h2>
+      <div class="tag tag-ouro mb-3" id="modal-tag"></div>
+      <p id="modal-txt" class="t-carta" style="font-size: 1.2rem; line-height: 1.8; color: var(--tinta-medio);"></p>
+    </div>
+  </dialog>
+
+  <style>
+    /* CSS rápido para o comportamento do Modal nativo do HTML */
+    .modal-postal {
+      border: none;
+      background: transparent;
+      padding: var(--sp-4);
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .modal-postal::backdrop {
+      background: rgba(26, 39, 68, 0.7);
+      /* Azul postal com transparência */
+      backdrop-filter: blur(4px);
+    }
+  </style>
+
+  <script src="./script/core.js" defer></script>
+  <script src="./script/dashboard.js" defer></script>
+  <script>
+    /* Inicializa header em página com layout customizado (sem partial) */
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof initMenu === 'function') initMenu();
+    });
+  </script>
 </body>
+
 </html>

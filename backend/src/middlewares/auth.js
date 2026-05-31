@@ -1,9 +1,9 @@
 // Middleware: Validar Token JWT
+const { getSupabaseAutenticado } = require('../config/supabase'); 
 
-module.exports = function authMiddleware(req, res, next) {
+module.exports = async function authMiddleware(req, res, next) {
   try {
     const authHeader = req.headers.authorization;
-
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({
@@ -22,17 +22,33 @@ module.exports = function authMiddleware(req, res, next) {
       });
     }
 
+    const clientLogado = getSupabaseAutenticado(req.token);
+
+    const { data: usuarioBanco, error } = await clientLogado
+      .from('usuarios')
+      .select('id, tipo')
+      .eq('auth_id', decoded.sub)
+      .single();
+
+    if (error || !usuarioBanco) {
+      return res.status(401).json({ 
+        erro: 'Usuário não encontrado no banco de dados.',
+        detalhes: error ? error.message : 'Nenhum registro com este auth_id.'
+      });
+    }
+
     req.usuario = {
-      id: decoded.sub,                          // UUID do usuário
-      email: decoded.email,                     // Email
-      tipo: decoded.user_metadata?.tipo || 'doador'  // Tipo (doador, instituicao, admin)
+      id: usuarioBanco.id,                           
+      auth_id: decoded.sub,                          
+      email: decoded.email,                          
+      tipo: usuarioBanco.tipo || decoded.user_metadata?.tipo || 'doador' 
     };
 
     next();
 
   } catch (erro) {
-    return res.status(401).json({
-      erro: 'Erro ao processar token',
+    return res.status(500).json({
+      erro: 'Erro interno ao processar token e buscar usuário',
       detalhes: erro.message
     });
   }

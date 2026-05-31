@@ -5,330 +5,333 @@ Substituir por renderização dinâmica vinda da API.
 -->
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="robots" content="noindex"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>Área Administrativa | Conectando Sonhos</title>
 
-  <link rel="shortcut icon" href="./logotipo/favicon.ico"/>
+  <link rel="shortcut icon" href="./logotipo/favicon.ico" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
 
-  <link rel="stylesheet" href="./style/design-system.css"/>
-  <link rel="stylesheet" href="./style/inner-pages.css"/>
-  <link rel="stylesheet" href="./style/admin.css"/>
+  <link rel="stylesheet" href="./style/design-system.css" />
+  <link rel="stylesheet" href="./style/inner-pages.css" />
+  <link rel="stylesheet" href="./style/admin.css" />
 </head>
+
 <body>
 
-<a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
 
-<header class="site-header" id="site-header" role="banner">
-  <a href="index.html" class="logo-link" aria-label="Conectando Sonhos — Página inicial">
-    <img src="./logotipo/logotipo.png" alt="" width="36" height="36"/>
-    <div>
-      <span class="logo-nome">Conectando Sonhos</span>
-      <span class="logo-sub">Painel Administrativo</span>
-    </div>
-  </a>
-   <nav class="nav-links" id="nav-menu" aria-label="Navegação principal">
-    <a href="index.html">Início</a>
-    <a href="cartas.html">Cartinhas</a>
-    <a href="impacto.html">Impacto</a>
-  </nav>
-
-  <div id="nav-usuario" class="nav-usuario"></div>
-
-  <button class="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
-    <span></span><span></span><span></span>
-  </button>
-</header>
-
-<div class="dashboard" id="conteudo">
-
-  <aside class="sidebar" aria-label="Navegação administrativa">
-
-    <div class="sb-user">
-      <div class="sb-av admin">A</div>
-      <div class="sb-info">
-        <strong>Administrador</strong>
-        <span>Controle da Plataforma</span>
+  <header class="site-header" id="site-header" role="banner">
+    <a href="index.html" class="logo-link" aria-label="Conectando Sonhos — Página inicial">
+      <img src="./logotipo/logotipo.png" alt="" width="36" height="36" />
+      <div>
+        <span class="logo-nome">Conectando Sonhos</span>
+        <span class="logo-sub">Painel Administrativo</span>
       </div>
-    </div>
-
-    <nav class="sb-nav">
-<button class="sb-link ativo" data-panel="visao-geral">
-        <i class="bi bi-speedometer2"></i>
-        Visão Geral
-      </button>
-
-      <button class="sb-link" data-panel="instituicoes">
-        <i class="bi bi-buildings-fill"></i>
-        Instituições
-      </button>
-
-      <button class="sb-link" data-panel="cartinhas">
-        <i class="bi bi-envelope-paper-fill"></i>
-        Cartinhas
-      </button>
-
-      <button class="sb-link" data-panel="doadores">
-        <i class="bi bi-people-fill"></i>
-        Doadores
-      </button>
-
-      <button class="sb-link" data-panel="presentes">
-        <i class="bi bi-gift-fill"></i>
-        Presentes
-      </button>
-
-      <button class="sb-link" data-panel="coleta">
-        <i class="bi bi-geo-alt-fill"></i>
-        Pontos de Coleta
-      </button>
-      <button class="sb-link perigo" data-action="logout">
-        <i class="bi bi-box-arrow-right"></i>
-        Sair
-      </button>
-
+    </a>
+    <nav class="nav-links" id="nav-menu" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="cartas.html">Cartinhas</a>
+      <a href="impacto.html">Impacto</a>
     </nav>
-  </aside>
 
-  <main class="dash-main">
+    <div id="nav-usuario" class="nav-usuario"></div>
 
-    <!-- VISÃO GERAL -->
-    <section class="dash-panel ativo" id="panel-visao-geral">
+    <button class="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
 
-      <div class="dash-hdr">
-        <h1>Painel Administrativo</h1>
+  <div class="dashboard" id="conteudo">
+
+    <aside class="sidebar" aria-label="Navegação administrativa">
+
+      <div class="sb-user">
+        <div class="sb-av admin">A</div>
+        <div class="sb-info">
+          <strong>Administrador</strong>
+          <span>Controle da Plataforma</span>
+        </div>
       </div>
 
-      <div class="cards-admin">
-
-        <article class="card-admin">
-          <span class="card-icon"><i class="bi bi-buildings"></i></span>
-          <div>
-            <strong>12</strong>
-            <span>Instituições</span>
-          </div>
-        </article>
-
-        <article class="card-admin">
-          <span class="card-icon"><i class="bi bi-envelope"></i></span>
-          <div>
-            <strong>86</strong>
-            <span>Cartinhas</span>
-            </div>
-        </article>
-
-        <article class="card-admin">
-          <span class="card-icon"><i class="bi bi-gift"></i></span>
-          <div>
-            <strong>41</strong>
-            <span>Presentes Reservados</span>
-          </div>
-        </article>
-
-        <article class="card-admin">
-          <span class="card-icon"><i class="bi bi-people"></i></span>
-          <div>
-            <strong>28</strong>
-            <span>Doadores</span>
-          </div>
-        </article>
-
-      </div>
-
-    </section>
-     <!-- INSTITUIÇÕES -->
-    <section class="dash-panel" id="panel-instituicoes">
-
-      <div class="dash-hdr">
-        <h1>Gerenciar Instituições</h1>
-        <button class="btn btn-primario btn-sm">
-          <i class="bi bi-plus-lg"></i>
-          Nova Instituição
+      <nav class="sb-nav">
+        <button class="sb-link ativo" data-panel="visao-geral">
+          <i class="bi bi-speedometer2"></i>
+          Visão Geral
         </button>
-      </div>
 
-      <div class="table-wrap">
-        <table class="tabela-admin">
-          <thead>
-            <tr>
-              <th>Instituição</th>
-              <th>Status</th>
-              <th>Cidade</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
+        <button class="sb-link" data-panel="instituicoes">
+          <i class="bi bi-buildings-fill"></i>
+          Instituições
+        </button>
 
-          <tbody>
-            <tr>
-              <td>Pastoral do Menor</td>
-              <td><span class="status aprovado">Aprovada</span></td>
-              <td>Franca/SP</td>
-              <td>
-                <button class="btn-icon"><i class="bi bi-pencil"></i></button>
-                <button class="btn-icon"><i class="bi bi-check-circle"></i></button>
-                <button class="btn-icon danger"><i class="bi bi-trash"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <button class="sb-link" data-panel="cartinhas">
+          <i class="bi bi-envelope-paper-fill"></i>
+          Cartinhas
+        </button>
 
-    </section>
+        <button class="sb-link" data-panel="doadores">
+          <i class="bi bi-people-fill"></i>
+          Doadores
+        </button>
 
+        <button class="sb-link" data-panel="presentes">
+          <i class="bi bi-gift-fill"></i>
+          Presentes
+        </button>
 
-    <!-- CARTINHAS -->
-    <section class="dash-panel" id="panel-cartinhas">
+        <button class="sb-link" data-panel="coleta">
+          <i class="bi bi-geo-alt-fill"></i>
+          Pontos de Coleta
+        </button>
+        <button class="sb-link perigo" data-action="logout">
+          <i class="bi bi-box-arrow-right"></i>
+          Sair
+        </button>
 
-      <div class="dash-hdr">
-        <h1>Gerenciar Cartinhas</h1>
-      </div>
+      </nav>
+    </aside>
 
-      <div class="table-wrap">
-        <table class="tabela-admin">
-          <thead>
-            <tr>
-              <th>Criança</th>
-              <th>Presente</th>
-              <th>Status</th>
-              <th>Instituição</th>
-              <th>Ações</th>
-               </tr>
-          </thead>
+    <main class="dash-main">
 
-          <tbody>
-            <tr>
-              <td>Ana - 8 anos</td>
-              <td>Boneca</td>
-              <td><span class="status pendente">Pendente</span></td>
-              <td>Pastoral do Menor</td>
-              <td>
-                <button class="btn-icon"><i class="bi bi-check-circle"></i></button>
-                <button class="btn-icon"><i class="bi bi-pencil"></i></button>
-                <button class="btn-icon danger"><i class="bi bi-trash"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- VISÃO GERAL -->
+      <section class="dash-panel ativo" id="panel-visao-geral">
 
-    </section>
-     <!-- DOADORES -->
-    <section class="dash-panel" id="panel-doadores">
+        <div class="dash-hdr">
+          <h1>Painel Administrativo</h1>
+        </div>
 
-      <div class="dash-hdr">
-        <h1>Gerenciar Doadores</h1>
-      </div>
+        <div class="cards-admin">
 
-      <div class="table-wrap">
-        <table class="tabela-admin">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>Adoções</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
+          <article class="card-admin">
+            <span class="card-icon"><i class="bi bi-buildings"></i></span>
+            <div>
+              <strong>12</strong>
+              <span>Instituições</span>
+            </div>
+          </article>
 
-          <tbody>
-            <tr>
-              <td>Maria Silva</td>
-              <td>maria@email.com</td>
-              <td>4</td>
-              <td>
-                <button class="btn-icon"><i class="bi bi-pencil"></i></button>
-                <button class="btn-icon danger"><i class="bi bi-trash"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <article class="card-admin">
+            <span class="card-icon"><i class="bi bi-envelope"></i></span>
+            <div>
+              <strong>86</strong>
+              <span>Cartinhas</span>
+            </div>
+          </article>
+
+          <article class="card-admin">
+            <span class="card-icon"><i class="bi bi-gift"></i></span>
+            <div>
+              <strong>41</strong>
+              <span>Presentes Reservados</span>
+            </div>
+          </article>
+
+          <article class="card-admin">
+            <span class="card-icon"><i class="bi bi-people"></i></span>
+            <div>
+              <strong>28</strong>
+              <span>Doadores</span>
+            </div>
+          </article>
+
+        </div>
+
+      </section>
+      <!-- INSTITUIÇÕES -->
+      <section class="dash-panel" id="panel-instituicoes">
+
+        <div class="dash-hdr">
+          <h1>Gerenciar Instituições</h1>
+          <button class="btn btn-primario btn-sm">
+            <i class="bi bi-plus-lg"></i>
+            Nova Instituição
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Instituição</th>
+                <th>Status</th>
+                <th>Cidade</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Pastoral do Menor</td>
+                <td><span class="status aprovado">Aprovada</span></td>
+                <td>Franca/SP</td>
+                <td>
+                  <button class="btn-icon"><i class="bi bi-pencil"></i></button>
+                  <button class="btn-icon"><i class="bi bi-check-circle"></i></button>
+                  <button class="btn-icon danger"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </section>
 
 
-    <!-- PRESENTES -->
-    <section class="dash-panel" id="panel-presentes">
+      <!-- CARTINHAS -->
+      <section class="dash-panel" id="panel-cartinhas">
 
-      <div class="dash-hdr">
-        <h1>Status dos Presentes</h1>
-      </div>
+        <div class="dash-hdr">
+          <h1>Gerenciar Cartinhas</h1>
+        </div>
 
-      <div class="table-wrap">
-        <table class="tabela-admin">
-          <thead>
-            <tr>
-              <th>Presente</th>
-              <th>Status</th>
-              <th>Doador</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
+        <div class="table-wrap">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Criança</th>
+                <th>Presente</th>
+                <th>Status</th>
+                <th>Instituição</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr>
-              <td>Kit Escolar</td>
-              <td><span class="status reservado">Reservado</span></td>
-              <td>Carlos</td>
-              <td>
-                <button class="btn-icon" title="Atualizar status"><i class="bi bi-arrow-repeat"></i></button>
-                <button class="btn-icon danger" title="Excluir presente"><i class="bi bi-trash"></i></button>
-              </td>
-            </tr>
-          </tbody>
-           </table>
-      </div>
+            <tbody>
+              <tr>
+                <td>Ana - 8 anos</td>
+                <td>Boneca</td>
+                <td><span class="status pendente">Pendente</span></td>
+                <td>Pastoral do Menor</td>
+                <td>
+                  <button class="btn-icon"><i class="bi bi-check-circle"></i></button>
+                  <button class="btn-icon"><i class="bi bi-pencil"></i></button>
+                  <button class="btn-icon danger"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-    </section>
+      </section>
+      <!-- DOADORES -->
+      <section class="dash-panel" id="panel-doadores">
+
+        <div class="dash-hdr">
+          <h1>Gerenciar Doadores</h1>
+        </div>
+
+        <div class="table-wrap">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Adoções</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Maria Silva</td>
+                <td>maria@email.com</td>
+                <td>4</td>
+                <td>
+                  <button class="btn-icon"><i class="bi bi-pencil"></i></button>
+                  <button class="btn-icon danger"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
 
-    <!-- PONTOS DE COLETA -->
-    <section class="dash-panel" id="panel-coleta">
+      <!-- PRESENTES -->
+      <section class="dash-panel" id="panel-presentes">
 
-      <div class="dash-hdr">
-        <h1>Pontos de Coleta</h1>
-        <button class="btn btn-primario btn-sm">
-          <i class="bi bi-plus-lg"></i>
-          Novo Ponto
-        </button>
-      </div>
+        <div class="dash-hdr">
+          <h1>Status dos Presentes</h1>
+        </div>
 
-      <div class="table-wrap">
-        <table class="tabela-admin">
-          <thead>
-            <tr>
-               <th>Local</th>
-              <th>Responsável</th>
-              <th>Cidade</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
+        <div class="table-wrap">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Presente</th>
+                <th>Status</th>
+                <th>Doador</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr>
-              <td>ACIF</td>
-              <td>João</td>
-              <td>Franca/SP</td>
-              <td>
-                <button class="btn-icon"><i class="bi bi-pencil"></i></button>
-                <button class="btn-icon danger"><i class="bi bi-trash"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            <tbody>
+              <tr>
+                <td>Kit Escolar</td>
+                <td><span class="status reservado">Reservado</span></td>
+                <td>Carlos</td>
+                <td>
+                  <button class="btn-icon" title="Atualizar status"><i class="bi bi-arrow-repeat"></i></button>
+                  <button class="btn-icon danger" title="Excluir presente"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-    </section>
+      </section>
 
-  </main>
-</div>
- <script src="./script/core.js"></script>
-<script src="./script/admin.js"></script>
+
+      <!-- PONTOS DE COLETA -->
+      <section class="dash-panel" id="panel-coleta">
+
+        <div class="dash-hdr">
+          <h1>Pontos de Coleta</h1>
+          <button class="btn btn-primario btn-sm">
+            <i class="bi bi-plus-lg"></i>
+            Novo Ponto
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="tabela-admin">
+            <thead>
+              <tr>
+                <th>Local</th>
+                <th>Responsável</th>
+                <th>Cidade</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>ACIF</td>
+                <td>João</td>
+                <td>Franca/SP</td>
+                <td>
+                  <button class="btn-icon"><i class="bi bi-pencil"></i></button>
+                  <button class="btn-icon danger"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+  <script src="./script/core.js"></script>
+  <script src="./script/admin.js"></script>
 </body>
+
 </html>

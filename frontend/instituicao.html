@@ -1,192 +1,211 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="robots" content="noindex"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>Área da Instituição | Conectando Sonhos</title>
-  <link rel="shortcut icon" href="./logotipo/favicon.ico"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
-  <link rel="stylesheet" href="./style/design-system.css"/>
-  <link rel="stylesheet" href="./style/inner-pages.css"/>
+  <link rel="shortcut icon" href="./logotipo/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="./style/design-system.css" />
+  <link rel="stylesheet" href="./style/inner-pages.css" />
 </head>
+
 <body>
 
-<a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+  <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
 
-<header class="site-header" id="site-header" role="banner">
-  <a href="index.html" class="logo-link" aria-label="Conectando Sonhos — Página inicial">
-    <img src="./logotipo/logotipo.png" alt="" width="36" height="36"/>
-    <div>
-      <span class="logo-nome">Conectando Sonhos</span>
-      <span class="logo-sub">Área da Instituição</span>
-    </div>
-  </a>
-  <nav class="nav-links" id="nav-menu" aria-label="Navegação principal">
-    <a href="index.html">Início</a>
-    <a href="cartas.html">Cartinhas</a>
-    <a href="impacto.html">Impacto</a>
-  </nav>
-  <div id="nav-usuario" class="nav-usuario" aria-label="Área do usuário"></div>
-  <button class="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
-    <span></span><span></span><span></span>
-  </button>
-</header>
-
-<div class="dashboard" id="conteudo">
-
-  <aside class="sidebar" aria-label="Navegação da instituição">
-    <div class="sb-user">
-      <div class="sb-av inst" id="sb-av" aria-hidden="true">I</div>
-      <div class="sb-info">
-        <strong id="sb-nome">Instituição</strong>
-        <span>Parceira Conectando Sonhos</span>
+  <header class="site-header" id="site-header" role="banner">
+    <a href="index.html" class="logo-link" aria-label="Conectando Sonhos — Página inicial">
+      <img src="./logotipo/logotipo.png" alt="" width="36" height="36" />
+      <div>
+        <span class="logo-nome">Conectando Sonhos</span>
+        <span class="logo-sub">Área da Instituição</span>
       </div>
-    </div>
-
-    <nav class="sb-nav" aria-label="Seções">
-      <button type="button" class="sb-link ativo" data-panel="cartinhas" aria-current="page">
-        <i class="bi bi-envelope-paper-fill" aria-hidden="true"></i> Cartinhas
-      </button>
-      <button type="button" class="sb-link" data-panel="nova">
-        <i class="bi bi-plus-circle-fill" aria-hidden="true"></i> Nova Cartinha
-      </button>
-      <button type="button" class="sb-link" data-panel="perfil">
-        <i class="bi bi-building" aria-hidden="true"></i> Dados da Instituição
-      </button>
-      <button type="button" class="sb-link perigo" data-action="logout">
-        <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
-      </button>
+    </a>
+    <nav class="nav-links" id="nav-menu" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="cartas.html">Cartinhas</a>
+      <a href="impacto.html">Impacto</a>
     </nav>
-  </aside>
+    <div id="nav-usuario" class="nav-usuario" aria-label="Área do usuário"></div>
+    <button class="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
 
-  <main class="dash-main">
+  <div class="dashboard" id="conteudo">
 
-    <!-- ═══ PAINEL · CARTINHAS ═══════════════════════════ -->
-    <section class="dash-panel ativo" id="panel-cartinhas" aria-labelledby="t-cartinhas">
-      <div class="dash-hdr">
-        <h1 id="t-cartinhas">
-          Cartinhas <span class="dash-badge" id="badge-tot">0</span>
-        </h1>
-        <button type="button" class="btn btn-primario btn-sm" data-go-panel="nova">
-          <i class="bi bi-plus" aria-hidden="true"></i> Nova Cartinha
-        </button>
-      </div>
-
-      <div class="lista-d" id="lista-d" aria-live="polite">
-        <div class="lista-load">
-          <div class="spinner" style="color:var(--postal);width:32px;height:32px;border-width:3px" aria-hidden="true"></div>
-          <p>Carregando…</p>
+    <aside class="sidebar" aria-label="Navegação da instituição">
+      <div class="sb-user">
+        <div class="sb-av inst" id="sb-av" aria-hidden="true">I</div>
+        <div class="sb-info">
+          <strong id="sb-nome">Instituição</strong>
+          <span>Parceira Conectando Sonhos</span>
         </div>
       </div>
-    </section>
 
-    <!-- ═══ PAINEL · NOVA CARTINHA ═══════════════════════ -->
-    <section class="dash-panel" id="panel-nova" aria-labelledby="t-nova">
-      <div class="dash-hdr">
-        <h1 id="t-nova">Nova Cartinha</h1>
-      </div>
+      <nav class="sb-nav" aria-label="Seções">
+        <button type="button" class="sb-link ativo" data-panel="cartinhas" aria-current="page">
+          <i class="bi bi-envelope-paper-fill" aria-hidden="true"></i> Cartinhas
+        </button>
+        <button type="button" class="sb-link" data-panel="nova">
+          <i class="bi bi-plus-circle-fill" aria-hidden="true"></i> Nova Cartinha
+        </button>
+        <button type="button" class="sb-link" data-panel="perfil">
+          <i class="bi bi-building" aria-hidden="true"></i> Dados da Instituição
+        </button>
+        <button type="button" class="sb-link perigo" data-action="logout">
+          <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
+        </button>
+      </nav>
+    </aside>
 
-      <div class="form-bloco2">
-        <h2>Cadastrar cartinha</h2>
-        <p>Preencha os dados da criança. A cartinha passará por análise antes de aparecer no mural público.</p>
+    <main class="dash-main">
 
-        <form id="form-nova" novalidate>
-          <div class="grid-campos g2">
-            <div class="campo-wrap">
-              <label class="campo-label" for="fn-nome">Nome da criança <span class="obg" aria-label="obrigatório">*</span></label>
-              <input type="text" id="fn-nome" class="campo-input" required/>
-            </div>
-            <div class="campo-wrap">
-              <label class="campo-label" for="fn-nasc">Nascimento <span class="obg" aria-label="obrigatório">*</span></label>
-              <input type="date" id="fn-nasc" class="campo-input" required/>
-            </div>
-          </div>
-
-          <div class="campo-wrap">
-            <label class="campo-label" for="fn-pres">Presente desejado <span class="obg" aria-label="obrigatório">*</span></label>
-            <select id="fn-pres" class="campo-select" required>
-              <option value="">Selecione</option>
-              <option value="bonecas">Bonecas</option>
-              <option value="veiculos">Carrinhos</option>
-              <option value="pelucia">Pelúcia</option>
-              <option value="jogos">Jogos</option>
-              <option value="bicicleta">Bicicleta</option>
-              <option value="kit-escolar">Kit Escolar</option>
-              <option value="bolas">Esportes</option>
-              <option value="arte">Arte</option>
-              <option value="livros">Livros</option>
-              <option value="roupa">Roupas</option>
-              <option value="tenis">Tênis</option>
-              <option value="outro">Outro</option>
-            </select>
-          </div>
-
-          <div class="campo-wrap">
-            <label class="campo-label" for="fn-txt">Texto da cartinha <span class="obg" aria-label="obrigatório">*</span></label>
-            <textarea id="fn-txt" class="campo-textarea" rows="5"
-                      placeholder="Querido Papai Noel…" required></textarea>
-            <span class="campo-hint">Preserve a voz autêntica da criança.</span>
-          </div>
-
-          <button type="submit" class="btn btn-primario btn-lg" id="btn-nova">
-            <i class="bi bi-send-fill" aria-hidden="true"></i>
-            Enviar para Análise
+      <!-- ═══ PAINEL · CARTINHAS ═══════════════════════════ -->
+      <section class="dash-panel ativo" id="panel-cartinhas" aria-labelledby="t-cartinhas">
+        <div class="dash-hdr">
+          <h1 id="t-cartinhas">
+            Cartinhas <span class="dash-badge" id="badge-tot">0</span>
+          </h1>
+          <button type="button" class="btn btn-primario btn-sm" data-go-panel="nova">
+            <i class="bi bi-plus" aria-hidden="true"></i> Nova Cartinha
           </button>
-        </form>
-      </div>
-    </section>
+        </div>
 
-    <!-- ═══ PAINEL · PERFIL ══════════════════════════════ -->
-    <section class="dash-panel" id="panel-perfil" aria-labelledby="t-perfil">
-      <div class="dash-hdr">
-        <h1 id="t-perfil">Dados da Instituição</h1>
-      </div>
-      <div class="form-bloco2">
-        <h2>Perfil institucional</h2>
-        <p>A edição de dados ficará disponível após a integração completa com o backend.</p>
-        <p class="campo-hint" style="margin-top:var(--sp-2)">
-          Em caso de dúvidas, entre em contato pela área administrativa.
-        </p>
-      </div>
-    </section>
+        <div class="lista-d" id="lista-d" aria-live="polite">
+          <div class="lista-load">
+            <div class="spinner" style="color:var(--postal);width:32px;height:32px;border-width:3px" aria-hidden="true">
+            </div>
+            <p>Carregando…</p>
+          </div>
+        </div>
+      </section>
 
-  </main>
-</div>
+      <!-- ═══ PAINEL · NOVA CARTINHA ═══════════════════════ -->
+      <section class="dash-panel" id="panel-nova" aria-labelledby="t-nova">
+        <div class="dash-hdr">
+          <h1 id="t-nova">Nova Cartinha</h1>
+        </div>
 
-<div class="toasts" role="status" aria-live="polite" aria-atomic="false"></div>
+        <div class="form-bloco2">
+          <h2>Cadastrar cartinha</h2>
+          <p>Preencha os dados da criança. A cartinha passará por análise antes de aparecer no mural público.</p>
 
-<dialog id="modal-leitura" class="modal-postal" aria-labelledby="modal-tit">
-  <div class="modal-corpo form-bloco2" style="position: relative; max-width: 500px; margin: auto;">
-    <button type="button" class="btn btn-ghost btn-p" onclick="fecharModal()" aria-label="Fechar" style="position: absolute; top: var(--sp-2); right: var(--sp-2);">
-      <i class="bi bi-x-lg" aria-hidden="true"></i>
-    </button>
-    <div class="carimbo mb-3">Correio do Noel</div>
-    <h2 id="modal-tit" style="font-family: var(--f-display); color: var(--tinta);"></h2>
-    <div class="tag tag-ouro mb-3" id="modal-tag"></div>
-    <p id="modal-txt" class="t-carta" style="font-size: 1.2rem; line-height: 1.8; color: var(--tinta-medio);"></p>
+          <form id="form-nova" novalidate>
+            <div class="grid-campos g2">
+              <div class="campo-wrap">
+                <label class="campo-label" for="fn-nome">Nome da criança <span class="obg"
+                    aria-label="obrigatório">*</span></label>
+                <input type="text" id="fn-nome" class="campo-input" required />
+              </div>
+              <div class="campo-wrap">
+                <label class="campo-label" for="fn-nasc">Nascimento <span class="obg"
+                    aria-label="obrigatório">*</span></label>
+                <input type="date" id="fn-nasc" class="campo-input" required />
+              </div>
+            </div>
+
+            <div class="campo-wrap">
+              <label class="campo-label" for="fn-pres">Presente desejado <span class="obg"
+                  aria-label="obrigatório">*</span></label>
+              <select id="fn-pres" class="campo-select" required>
+                <option value="">Selecione</option>
+                <option value="bonecas">Bonecas</option>
+                <option value="veiculos">Carrinhos</option>
+                <option value="pelucia">Pelúcia</option>
+                <option value="jogos">Jogos</option>
+                <option value="bicicleta">Bicicleta</option>
+                <option value="kit-escolar">Kit Escolar</option>
+                <option value="bolas">Esportes</option>
+                <option value="arte">Arte</option>
+                <option value="livros">Livros</option>
+                <option value="roupa">Roupas</option>
+                <option value="tenis">Tênis</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="campo-wrap">
+              <label class="campo-label" for="fn-txt">Texto da cartinha <span class="obg"
+                  aria-label="obrigatório">*</span></label>
+              <textarea id="fn-txt" class="campo-textarea" rows="5" placeholder="Querido Papai Noel…"
+                required></textarea>
+              <span class="campo-hint">Preserve a voz autêntica da criança.</span>
+            </div>
+
+            <button type="submit" class="btn btn-primario btn-lg" id="btn-nova">
+              <i class="bi bi-send-fill" aria-hidden="true"></i>
+              Enviar para Análise
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ═══ PAINEL · PERFIL ══════════════════════════════ -->
+      <section class="dash-panel" id="panel-perfil" aria-labelledby="t-perfil">
+        <div class="dash-hdr">
+          <h1 id="t-perfil">Dados da Instituição</h1>
+        </div>
+        <div class="form-bloco2">
+          <h2>Perfil institucional</h2>
+          <p>A edição de dados ficará disponível após a integração completa com o backend.</p>
+          <p class="campo-hint" style="margin-top:var(--sp-2)">
+            Em caso de dúvidas, entre em contato pela área administrativa.
+          </p>
+        </div>
+      </section>
+
+    </main>
   </div>
-</dialog>
 
-<style>
-  .modal-postal { border: none; background: transparent; padding: var(--sp-4); width: 100%; max-width: 100vw; }
-  .modal-postal::backdrop { background: rgba(26, 39, 68, 0.7); backdrop-filter: blur(4px); }
-</style>
+  <div class="toasts" role="status" aria-live="polite" aria-atomic="false"></div>
 
-<script src="./script/core.js" defer></script>
-<script src="./script/dashboard.js" defer></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    if (typeof initMenu === 'function') initMenu();
-    /* Atalho: botão "Nova Cartinha" do header → painel-nova */
-    document.querySelectorAll('[data-go-panel]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelector(`[data-panel="${btn.dataset.goPanel}"]`)?.click();
+  <dialog id="modal-leitura" class="modal-postal" aria-labelledby="modal-tit">
+    <div class="modal-corpo form-bloco2" style="position: relative; max-width: 500px; margin: auto;">
+      <button type="button" class="btn btn-ghost btn-p" onclick="fecharModal()" aria-label="Fechar"
+        style="position: absolute; top: var(--sp-2); right: var(--sp-2);">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+      <div class="carimbo mb-3">Correio do Noel</div>
+      <h2 id="modal-tit" style="font-family: var(--f-display); color: var(--tinta);"></h2>
+      <div class="tag tag-ouro mb-3" id="modal-tag"></div>
+      <p id="modal-txt" class="t-carta" style="font-size: 1.2rem; line-height: 1.8; color: var(--tinta-medio);"></p>
+    </div>
+  </dialog>
+
+  <style>
+    .modal-postal {
+      border: none;
+      background: transparent;
+      padding: var(--sp-4);
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .modal-postal::backdrop {
+      background: rgba(26, 39, 68, 0.7);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+
+  <script src="./script/core.js" defer></script>
+  <script src="./script/dashboard.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof initMenu === 'function') initMenu();
+      /* Atalho: botão "Nova Cartinha" do header → painel-nova */
+      document.querySelectorAll('[data-go-panel]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelector(`[data-panel="${btn.dataset.goPanel}"]`)?.click();
+        });
       });
     });
-  });
-</script>
+  </script>
 </body>
+
 </html>
