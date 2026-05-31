@@ -5,11 +5,13 @@ const { supabase, getSupabaseAutenticado } = require("../config/supabase");
 class Cartinha {
   //LISTAR TODAS (Público)
   static async buscarTodas(filtros = {}) {
+    console.log("FILTROS RECEBIDOS:", filtros);
     try {
    
       let query = supabase
         .from("vw_cartinhas_publicas") 
         .select("*");
+      console.log("QUERY INICIAL RODANDO");
 
       if (filtros.status) {
         query = query.eq("status", filtros.status);

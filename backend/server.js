@@ -17,8 +17,24 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5500';
 
 app.use(helmet());
 
-app.use(cors({ 
-  origin: FRONTEND_URL,
+// Permite que mais de uma origem (URL) fale com o backend
+const allowedOrigins = [
+  FRONTEND_URL, 
+  'http://localhost:5500', 
+  'http://127.0.0.1:5500'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Permite requests sem origin (como ferramentas como Postman)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'A política CORS deste site não permite acesso desta origem.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true
 }));
 
@@ -59,34 +75,31 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`
-╔════════════════════════════════════════════════════════════╗
-║                                                            ║
-║         🎄 CONECTANDO SONHOS - API BACKEND 🎄             ║
-║                                                            ║
-╠════════════════════════════════════════════════════════════╣
-║                                                            ║
-║  ✅ Servidor rodando em:                                  ║
-║     http://localhost:${PORT}                                   ║
-║                                                            ║
-║  📍 API em:                                                ║
-║     http://localhost:${PORT}/api                              ║
-║                                                            ║
-║  🌍 CORS habilitado para:                                 ║
-║     ${FRONTEND_URL}                                   ║
-║                                                            ║
-║  ⚙️  Ambiente:                                             ║
-║     ${NODE_ENV}                                      ║
-║                                                            ║
-║  📚 Documentação:                                          ║
-║     GET /api (lista todas as rotas)                       ║
-║                                                            ║
-║  💡 Para testar:                                           ║
-║     curl http://localhost:${PORT}/api                         ║
-║                                                            ║
-║  📦 Dependências:                                          ║
-║     express, supabase-js, cors, helmet, morgan            ║
-║                                                            ║
-╚════════════════════════════════════════════════════════════╝
+                                                            
+    🎄 CONECTANDO SONHOS - API BACKEND 🎄             
+                                                            
+                                                            
+  ✅ Servidor rodando em:                                  
+    http://localhost:${PORT}                                   
+                                                            
+  📍 API em:                                                
+     http://localhost:${PORT}/api                              
+                                                            
+  🌍 CORS habilitado para:                                 
+     ${FRONTEND_URL}                                   
+                                                            
+  ⚙️  Ambiente:                                             
+     ${NODE_ENV}                                      
+                                                            
+  📚 Documentação:                                          
+     GET /api (lista todas as rotas)                       
+                                                            
+  💡 Para testar:                                           
+     curl http://localhost:${PORT}/api                         
+                                                            
+  📦 Dependências:                                          
+     express, supabase-js, cors, helmet, morgan            
+                                                            
   `);
 });
 
