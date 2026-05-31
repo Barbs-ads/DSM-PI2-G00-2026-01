@@ -1,7 +1,5 @@
 // Controller: Autenticação
 // Responsável por registrar e fazer login
-
-
 const { supabase } = require('../config/supabase');
 
 class AuthController {

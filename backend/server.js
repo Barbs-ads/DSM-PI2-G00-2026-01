@@ -1,65 +1,43 @@
-// ═══════════════════════════════════════════════════════════
-// Servidor Principal
-// Aqui tudo se junta!
-// ═══════════════════════════════════════════════════════════
+// Servidor
 
-require('dotenv').config();  // Carregar variáveis de ambiente do .env
+require('dotenv').config(); 
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const routes = require('./routes');
+const routes = require('./src/routes/index');
 
-// ═══════════════════════════════════════════════════════════
 // CRIAR APP EXPRESS
-// ═══════════════════════════════════════════════════════════
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5500';
 
-// ═══════════════════════════════════════════════════════════
-// MIDDLEWARES GLOBAIS
-// Executam em TODA requisição ANTES de chegar na rota
-// ═══════════════════════════════════════════════════════════
 
-// 1. HELMET - Adiciona headers de segurança HTTP
-// Protege contra: XSS, Clickjacking, MIME-sniffing, etc
 app.use(helmet());
 
-// 2. CORS - Permitir requisições do frontend
-// Sem isso, navegador bloqueia requisições de origem diferente
 app.use(cors({ 
   origin: FRONTEND_URL,
   credentials: true
 }));
 
-// 3. EXPRESS JSON - Parse requisições com body JSON
-// Transforma string JSON em objeto JavaScript
+
 app.use(express.json());
 
-// 4. EXPRESS URL-ENCODED - Parse formulários
-// Transforma dados de formulário em objeto JavaScript
+
 app.use(express.urlencoded({ extended: true }));
 
-// 5. MORGAN - Log de requisições
-// Mostra no console: GET /api 200 12ms
+
 app.use(morgan('dev'));
 
-// ═══════════════════════════════════════════════════════════
+
 // ROTAS
-// ═══════════════════════════════════════════════════════════
-// Todas as rotas estão em src/routes/index.js
-// Aqui apenas conectamos com o prefixo /api
+
 app.use('/api', routes);
 
-// ═══════════════════════════════════════════════════════════
-// TRATAMENTO DE ERROS
-// Se nenhuma rota acima respondeu, cai aqui
-// ═══════════════════════════════════════════════════════════
 
 // 404 - Rota não encontrada
-// (já tratado em routes/index.js, mas deixa por segurança)
 app.use((req, res) => {
   res.status(404).json({
     erro: 'Rota não encontrada',
@@ -68,7 +46,7 @@ app.use((req, res) => {
   });
 });
 
-// Tratamento de erros (middleware com 4 parâmetros)
+
 app.use((err, req, res, next) => {
   console.error('❌ Erro não capturado:', err);
   res.status(err.status || 500).json({
@@ -77,9 +55,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ═══════════════════════════════════════════════════════════
 // INICIAR SERVIDOR
-// ═══════════════════════════════════════════════════════════
+
 app.listen(PORT, () => {
   console.log(`
 ╔════════════════════════════════════════════════════════════╗
@@ -112,11 +89,6 @@ app.listen(PORT, () => {
 ╚════════════════════════════════════════════════════════════╝
   `);
 });
-
-// ═══════════════════════════════════════════════════════════
-// TRATAMENTO DE ERROS NÃO CAPTURADOS
-// Se algo muito ruim acontecer
-// ═══════════════════════════════════════════════════════════
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error('❌ Promise rejeitada sem tratamento:', reason);
