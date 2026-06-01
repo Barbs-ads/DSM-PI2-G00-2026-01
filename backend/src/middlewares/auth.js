@@ -14,7 +14,7 @@ module.exports = async function authMiddleware(req, res, next) {
 
     req.token = authHeader.split(" ")[1];
 
-   const decoded = require("jsonwebtoken").decode(req.token);
+    const decoded = require("jsonwebtoken").decode(req.token);
 
     if (!decoded) {
       return res.status(401).json({
@@ -26,7 +26,7 @@ module.exports = async function authMiddleware(req, res, next) {
 
     const { data: usuarioBanco, error } = await clientLogado
       .from("usuarios")
-      .select("id, tipo")
+      .select("id, tipo, inst_id")
       .eq("auth_id", decoded.sub)
       .single();
 
@@ -42,6 +42,7 @@ module.exports = async function authMiddleware(req, res, next) {
       auth_id: decoded.sub,
       email: decoded.email,
       tipo: usuarioBanco.tipo,
+      inst_id: usuarioBanco.inst_id || null,
     };
 
     console.log("TIPO REAL:", req.usuario.tipo);
