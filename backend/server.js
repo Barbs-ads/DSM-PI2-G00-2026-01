@@ -75,15 +75,16 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`
+
                                                             
-    🎄 CONECTANDO SONHOS - API BACKEND 🎄             
+         🎄 CONECTANDO SONHOS - API BACKEND 🎄             
                                                             
-                                                            
-  ✅ Servidor rodando em:                                  
-    http://localhost:${PORT}                                   
+
+                                                           
+  ✅ Servidor rodando em:                                       http://localhost:${PORT}                                   
                                                             
   📍 API em:                                                
-     http://localhost:${PORT}/api                              
+   http://localhost:${PORT}/api                              
                                                             
   🌍 CORS habilitado para:                                 
      ${FRONTEND_URL}                                   
