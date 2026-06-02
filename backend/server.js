@@ -17,7 +17,6 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5500';
 
 app.use(helmet());
 
-// Permite que mais de uma origem (URL) fale com o backend
 const allowedOrigins = [
   FRONTEND_URL, 
   'http://localhost:5500', 
@@ -49,7 +48,6 @@ app.use(morgan('dev'));
 
 
 // ROTAS
-
 app.use('/api', routes);
 
 
@@ -72,16 +70,16 @@ app.use((err, req, res, next) => {
 });
 
 // INICIAR SERVIDOR
-
 app.listen(PORT, () => {
   console.log(`
 
                                                             
-         🎄 CONECTANDO SONHOS - API BACKEND 🎄             
+         🎄 CONECTANDO SONHOS - API BACKEND 🎄            
                                                             
 
-                                                           
-  ✅ Servidor rodando em:                                       http://localhost:${PORT}                                   
+                                                            
+  ✅ Servidor rodando em:                                  
+     http://localhost:${PORT}                                   
                                                             
   📍 API em:                                                
    http://localhost:${PORT}/api                              
@@ -101,6 +99,7 @@ app.listen(PORT, () => {
   📦 Dependências:                                          
      express, supabase-js, cors, helmet, morgan            
                                                             
+
   `);
 });
 

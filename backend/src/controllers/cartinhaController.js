@@ -20,7 +20,6 @@ class CartinhaController {
       if (limite) {
         filtros.limite = parseInt(limite);
         if (pagina) {
-          // Página 1 = offset 0, página 2 = offset 10, etc
           filtros.offset = (parseInt(pagina) - 1) * filtros.limite;
         }
       }
@@ -145,7 +144,7 @@ class CartinhaController {
     }
   }
 
-  // ADOTAR
+  //ADOTAR
 
   async adotar(req, res) {
     try {
@@ -188,7 +187,7 @@ class CartinhaController {
     }
   }
 
-  // APROVAR
+  //APROVAR
   async aprovar(req, res) {
     try {
       const { id } = req.params;
@@ -219,7 +218,7 @@ class CartinhaController {
     }
   }
 
-  //  MARCAR ENTREGUE
+  // MARCAR ENTREGUE
   async marcarEntregue(req, res) {
     try {
       const { id } = req.params;

@@ -2,15 +2,15 @@ const { supabase, getSupabaseAutenticado } = require("../config/supabase");
 
 class Cartinha {
 
-  //LISTAR TODAS
+  // LISTAR TODAS (público — usa a view)
   static async buscarTodas(filtros = {}) {
     try {
       let query = supabase.from("vw_cartinhas_publicas").select("*");
 
-      if (filtros.status)      query = query.eq("status",      filtros.status);
-      if (filtros.categoria_id)query = query.eq("categoria_id",parseInt(filtros.categoria_id));
-      if (filtros.inst_id)     query = query.eq("inst_id",     parseInt(filtros.inst_id));
-      if (filtros.busca)       query = query.ilike("texto",    `%${filtros.busca}%`);
+      if (filtros.status)       query = query.eq("status",       filtros.status);
+      if (filtros.categoria_id) query = query.eq("categoria_id", parseInt(filtros.categoria_id));
+      if (filtros.inst_id)      query = query.eq("inst_id",      parseInt(filtros.inst_id));
+      if (filtros.busca)        query = query.ilike("texto",     `%${filtros.busca}%`);
 
       if (filtros.limite) {
         const offset = filtros.offset || 0;
@@ -28,7 +28,7 @@ class Cartinha {
     }
   }
 
-  // BUSCAR POR ID 
+  // BUSCAR POR ID (público — usa a view) 
   static async buscarPorId(id) {
     try {
       const { data, error } = await supabase
@@ -44,7 +44,7 @@ class Cartinha {
     }
   }
 
-  // ADOTAR (RPC do banco) 
+  // ADOTAR 
   static async adotar(cartinhaId, pontoId, token) {
     try {
       const client = getSupabaseAutenticado(token);
@@ -89,7 +89,7 @@ class Cartinha {
     }
   }
 
-  // APROVAR 
+  //APROVAR 
   static async aprovar(cartinhaId, token) {
     try {
       const client = getSupabaseAutenticado(token);
@@ -106,7 +106,7 @@ class Cartinha {
     }
   }
 
-  // MARCAR ENTREGUE 
+  //MARCAR ENTREGUE
   static async marcarEntregue(cartinhaId, token) {
     try {
       const client = getSupabaseAutenticado(token);
@@ -123,7 +123,7 @@ class Cartinha {
     }
   }
 
-  // CANCELAR 
+  //CANCELAR
   static async cancelar(cartinhaId, motivo, token) {
     try {
       const client = getSupabaseAutenticado(token);
@@ -140,25 +140,61 @@ class Cartinha {
     }
   }
 
-  // MINHAS ADOÇÕES 
-  
+  //MINHAS ADOÇÕES 
+
   static async minhasAdocoes(token, usuarioId) {
     try {
       const client = getSupabaseAutenticado(token);
+
+      // Busca na tabela cartinhas com filtro EXPLÍCITO por doador_id
+      // O JOIN traz crianca.nome e categoria slug/nome
       const { data, error } = await client
-        .from("vw_cartinhas_publicas")
-        .select("*")
-        .in("status", ["adotada", "entregue"]);
-     
+        .from("cartinhas")
+        .select(`
+          id,
+          texto,
+          status,
+          adotada_em,
+          entregue_em,
+          ponto_id,
+          doador_id,
+          criancas ( nome, data_nasc ),
+          categorias_presente ( slug, nome ),
+          instituicoes ( nome )
+        `)
+        .eq("doador_id", usuarioId)           // ← filtro EXPLÍCITO — só deste doador
+        .in("status", ["adotada", "entregue"])
+        .order("adotada_em", { ascending: false });
+
       if (error) throw error;
-      return data || [];
+
+      // Formata no mesmo padrão que o dashboard.js espera
+      return (data || []).map(c => ({
+        id:             c.id,
+        texto:          c.texto,
+        status:         c.status,
+        adotada_em:     c.adotada_em,
+        entregue_em:    c.entregue_em,
+        // Campos que o dashboard usa para exibir
+        crianca_nome:   c.criancas?.nome       || "—",
+        crianca_idade:  c.criancas?.data_nasc
+          ? Math.floor((Date.now() - new Date(c.criancas.data_nasc)) / (365.25 * 24 * 3600 * 1000))
+          : "?",
+        categoria_slug: c.categorias_presente?.slug || "outro",
+        categoria_nome: c.categorias_presente?.nome || "—",
+        inst_nome:      c.instituicoes?.nome   || "—",
+        // Aliases que o adaptador do dashboard.js usa
+        nome_crianca:   c.criancas?.nome       || "—",
+        presente:       c.categorias_presente?.slug || "outro",
+        nascimento:     c.criancas?.data_nasc  || null,
+      }));
     } catch (erro) {
       console.error("❌ Erro ao buscar adoções:", erro.message);
       throw erro;
     }
   }
 
-  // CARTINHAS POR INSTITUIÇÃO 
+  // ── CARTINHAS POR INSTITUIÇÃO ─────────────────────────────────
   static async cartinhasPorInstituicao(instId, token) {
     try {
       const client = getSupabaseAutenticado(token);

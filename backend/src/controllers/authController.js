@@ -133,7 +133,7 @@ class AuthController {
           responsavel_nome,
           responsavel_email,
           responsavel_telefone,
-          verificada: false  // Aguardando aprovação
+          verificada: false  
         })
         .select();
 
