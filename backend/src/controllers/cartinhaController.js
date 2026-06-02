@@ -4,7 +4,7 @@ const Cartinha = require("../models/Cartinha");
 
 class CartinhaController {
   //LISTAR TODAS
-  
+
   async listar(req, res) {
     try {
       const { status, categoria_id, inst_id, busca, limite, pagina } =
@@ -20,7 +20,6 @@ class CartinhaController {
       if (limite) {
         filtros.limite = parseInt(limite);
         if (pagina) {
-          // Página 1 = offset 0, página 2 = offset 10, etc
           filtros.offset = (parseInt(pagina) - 1) * filtros.limite;
         }
       }
@@ -28,7 +27,6 @@ class CartinhaController {
       if (req.usuario && req.usuario.tipo === "instituicao") {
         filtros.inst_id = req.usuario.inst_id;
       }
-
 
       const cartinhas = await Cartinha.buscarTodas(filtros);
 
@@ -76,10 +74,9 @@ class CartinhaController {
   }
 
   // CRIAR ( instituição e admin)
-
   async criar(req, res) {
+    console.log("BODY:", req.body);
     try {
-      // Verificar permissão
       if (
         !req.usuario ||
         (req.usuario.tipo !== "instituicao" && req.usuario.tipo !== "admin")
@@ -89,44 +86,65 @@ class CartinhaController {
         });
       }
 
-      const { crianca_id, categoria_id, texto, foto_url } = req.body;
+      const { nome_crianca, nascimento, presente, texto, foto_url } = req.body;
 
-      if (!crianca_id || !categoria_id || !texto) {
+      // Validações
+      if (!nome_crianca || !nascimento || !presente || !texto) {
         return res.status(400).json({
-          erro: "crianca_id, categoria_id e texto são obrigatórios",
+          erro: "nome_crianca, nascimento, presente e texto são obrigatórios",
         });
       }
-
       if (texto.length < 20) {
         return res.status(400).json({
           erro: "Texto deve ter no mínimo 20 caracteres",
         });
       }
 
-      const cartinha = await Cartinha.criar(
-        {
-          crianca_id: parseInt(crianca_id),
-          inst_id: req.usuario.inst_id, // Usa a instituição do token
-          categoria_id: parseInt(categoria_id),
-          texto,
-          foto_url: foto_url || null,
-        },
-        req.token,
-      );
+      const inst_id = req.usuario.inst_id;
+      if (!inst_id) {
+        return res.status(400).json({
+          erro: "Usuário não está vinculado a nenhuma instituição",
+        });
+      }
+
+      const { supabase } = require("../config/supabase");
+      const { data: catData, error: catError } = await supabase
+        .from("categorias_presente")
+        .select("id")
+        .eq("slug", presente)
+        .single();
+
+      if (catError || !catData) {
+        return res.status(400).json({
+          erro: `Categoria inválida: "${presente}"`,
+        });
+      }
+
+      const { getSupabaseAutenticado } = require("../config/supabase");
+      const client = getSupabaseAutenticado(req.token);
+      const { data, error } = await client.rpc("cadastrar_cartinha", {
+        _inst_id: inst_id,
+        _nome_crianca: nome_crianca,
+        _data_nasc: nascimento,
+        _genero: "nao-informado",
+        _categoria_id: catData.id,
+        _texto: texto,
+        _foto_url: foto_url || null,
+      });
+
+      if (error) throw error;
 
       res.status(201).json({
-        mensagem: "Cartinha criada! Aguardando aprovação.",
-        cartinha,
+        mensagem: "✅ Cartinha enviada para análise!",
+        cartinha: data,
       });
     } catch (erro) {
       console.error("❌ Erro no controller criar:", erro);
-      res.status(400).json({
-        erro: erro.message,
-      });
+      res.status(400).json({ erro: erro.message });
     }
   }
 
-  // ADOTAR 
+  //ADOTAR
 
   async adotar(req, res) {
     try {
@@ -154,7 +172,7 @@ class CartinhaController {
       const cartinha = await Cartinha.adotar(
         parseInt(id),
         parseInt(ponto_id),
-        req.token, 
+        req.token,
       );
 
       res.json({
@@ -169,7 +187,7 @@ class CartinhaController {
     }
   }
 
-  // APROVAR 
+  //APROVAR
   async aprovar(req, res) {
     try {
       const { id } = req.params;
@@ -200,7 +218,7 @@ class CartinhaController {
     }
   }
 
-  // ═══ MARCAR ENTREGUE
+  // MARCAR ENTREGUE
   async marcarEntregue(req, res) {
     try {
       const { id } = req.params;
@@ -211,7 +229,6 @@ class CartinhaController {
         });
       }
 
-  
       if (!id || isNaN(id)) {
         return res.status(400).json({
           erro: "ID deve ser um número válido",
@@ -294,7 +311,7 @@ class CartinhaController {
     }
   }
 
-  // ESTATÍSTICAS 
+  // ESTATÍSTICAS
   async estatisticas(req, res) {
     try {
       const stats = await Cartinha.estatisticas();

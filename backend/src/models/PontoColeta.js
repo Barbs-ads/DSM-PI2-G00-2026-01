@@ -1,7 +1,7 @@
 const { supabase, getSupabaseAutenticado } = require("../config/supabase");
 
 class PontoColeta {
-  // ═══ LISTAR PONTOS ATIVOS (Público) ═══
+  // LISTAR PONTOS ATIVOS (Público)
   static async buscarTodos() {
     try {
       const { data, error } = await supabase
@@ -18,7 +18,7 @@ class PontoColeta {
     }
   }
 
-  // ═══ CADASTRAR PONTO (Admin) ═══
+  // CADASTRAR PONTO (Admin)
   static async criar(dados, token) {
     try {
       const client = getSupabaseAutenticado(token);
