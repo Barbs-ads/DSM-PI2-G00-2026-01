@@ -82,7 +82,7 @@ app.listen(PORT, () => {
      http://localhost:${PORT}                                   
                                                             
   📍 API em:                                                
-     http://localhost:${PORT}/api                              
+   http://localhost:${PORT}/api                              
                                                             
   🌍 CORS habilitado para:                                 
      ${FRONTEND_URL}                                   

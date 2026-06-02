@@ -291,7 +291,7 @@ class CartinhaController {
   // MINHAS ADOÇÕES (GET /api/cartinhas/doador/minhas)
   async minhasAdocoes(req, res) {
     try {
-      // Verificar permissão
+     
       if (!req.usuario || req.usuario.tipo !== "doador") {
         return res.status(403).json({
           erro: "Apenas doadores podem ver suas adoções",
