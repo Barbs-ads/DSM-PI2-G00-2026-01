@@ -7,7 +7,11 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": ["sonhos", "cartinhas", "doacao"],
+  "keywords": [
+    "sonhos",
+    "cartinhas",
+    "doacao"
+  ],
   "author": "Grupo QuadCore",
   "license": "ISC",
   "type": "commonjs",
@@ -18,10 +22,10 @@
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
     "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3",
     "morgan": "^1.10.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
   }
-  
 }
