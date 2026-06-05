@@ -42,7 +42,7 @@ class Cartinha {
       }
 
       // Ordenação
-      query = query.order('criada_em', { ascending: false });
+      query = query.order('enviada_em', { ascending: false });
 
       // Executar query
       const { data, error } = await query;

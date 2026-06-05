@@ -86,6 +86,23 @@ router.get  ('/admin/cartinhas',               authMiddleware, async (req, res) 
 // ── ADMIN — INSTITUIÇÕES ───────────────────────────────────────
 router.get  ('/admin/instituicoes',             authMiddleware, instituicaoController.listarTodas);
 router.patch('/admin/instituicoes/:id/aprovar', authMiddleware, instituicaoController.aprovar);
+router.patch('/admin/instituicoes/:id/desativar', authMiddleware, async (req, res) => {
+  try {
+    if (!req.usuario || req.usuario.tipo !== 'admin') {
+      return res.status(403).json({ erro: 'Acesso negado.' });
+    }
+    const { getSupabaseAutenticado } = require('../config/supabase');
+    const client = getSupabaseAutenticado(req.token);
+    const { error } = await client
+      .from('instituicoes')
+      .update({ verificada: false })
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ mensagem: '✅ Instituição desativada.' });
+  } catch (erro) {
+    res.status(400).json({ erro: erro.message });
+  }
+});
 
 // ── ADMIN — DOADORES ───────────────────────────────────────────
 router.get('/admin/doadores', authMiddleware, async (req, res) => {
