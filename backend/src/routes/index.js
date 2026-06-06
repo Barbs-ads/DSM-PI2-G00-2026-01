@@ -100,8 +100,40 @@ router.post('/cartinhas', authMiddleware, async (req, res) => {
   }
 });
 
+router.delete('/cartinhas/:id', authMiddleware, async (req, res) => {
+  try {
+    if (!req.usuario || (req.usuario.tipo !== 'instituicao' && req.usuario.tipo !== 'admin')) {
+      return res.status(403).json({ erro: 'Acesso negado.' });
+    }
+    const { getSupabaseAutenticado } = require('../config/supabase');
+    const client = getSupabaseAutenticado(req.token);
+    const { error } = await client
+      .from('cartinhas')
+      .delete()
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ mensagem: 'Cartinha excluída com sucesso.' });
+  } catch (erro) {
+    res.status(400).json({ erro: erro.message });
+  }
+});
+
 // ── INSTITUIÇÕES (público) ─────────────────────────────────────
 router.get('/instituicoes', instituicaoController.listarAprovadas);
+router.get('/instituicoes/:id', async (req, res) => {
+  try {
+    const { supabase } = require('../config/supabase');
+    const { data, error } = await supabase
+      .from('instituicoes')
+      .select('*')
+      .eq('id', req.params.id)
+      .single();
+    if (error) throw error;
+    res.json(data);
+  } catch (erro) {
+    res.status(404).json({ erro: 'Instituição não encontrada' });
+  }
+});
 router.patch('/instituicoes/:id', authMiddleware, async (req, res) => {
   try {
     if (!req.usuario || req.usuario.tipo !== 'instituicao' && req.usuario.tipo !== 'admin') {
