@@ -19,15 +19,108 @@ router.post('/auth/registrar/instituicao', authController.registrarInstituicao);
 router.post('/auth/login',                 authController.login);
 
 // ── CARTINHAS (público + protegidas) ──────────────────────────
-// ATENÇÃO: rota específica ANTES da rota com parâmetro (:id)
 router.get ('/cartinhas/doador/minhas', authMiddleware, cartinhaController.minhasAdocoes);
 router.get ('/cartinhas',                               cartinhaController.listar);
 router.get ('/cartinhas/:id',                           cartinhaController.buscarPorId);
 router.post('/cartinhas/:id/adotar',    authMiddleware, cartinhaController.adotar);
-router.post('/cartinhas',               authMiddleware, cartinhaController.criar);
+router.post('/cartinhas', authMiddleware, async (req, res) => {
+  try {
+    if (!req.usuario || (req.usuario.tipo !== 'instituicao' && req.usuario.tipo !== 'admin')) {
+      return res.status(403).json({ erro: 'Apenas instituições podem criar cartinhas' });
+    }
+
+    const { nome, nascimento, presente, texto, crianca_id, categoria_id } = req.body;
+
+    if (!texto || texto.length < 5) {
+      return res.status(400).json({ erro: 'Texto da cartinha é obrigatório' });
+    }
+
+    const { getSupabaseAutenticado } = require('../config/supabase');
+    const client = getSupabaseAutenticado(req.token);
+
+    // Busca categoria pelo slug ou usa o ID direto
+    let catId = categoria_id;
+    if (!catId && presente) {
+      const { data: cat } = await client
+        .from('categorias_presente')
+        .select('id')
+        .eq('slug', presente)
+        .single();
+      catId = cat?.id;
+    }
+
+    if (!catId) {
+      return res.status(400).json({ erro: 'Categoria não encontrada' });
+    }
+
+    // Cria ou usa crianca_id existente
+    let crId = crianca_id;
+    if (!crId && nome) {
+      const { data: crianca, error: criancaErr } = await client
+        .from('criancas')
+        .insert({
+          nome,
+          data_nasc: nascimento || null,
+          inst_id: req.usuario.inst_id
+        })
+        .select()
+        .single();
+
+      if (criancaErr) throw criancaErr;
+      crId = crianca.id;
+    }
+
+    if (!crId) {
+      return res.status(400).json({ erro: 'Nome da criança é obrigatório' });
+    }
+
+    // Cria a cartinha
+    const { data: cartinha, error } = await client
+      .from('cartinhas')
+      .insert({
+        crianca_id: crId,
+        inst_id: req.usuario.inst_id,
+        categoria_id: catId,
+        texto,
+        status: 'aguardando'
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    res.status(201).json({
+      mensagem: 'Cartinha criada! Aguardando aprovação.',
+      cartinha
+    });
+
+  } catch (erro) {
+    console.error('❌ Erro ao criar cartinha:', erro);
+    res.status(400).json({ erro: erro.message });
+  }
+});
 
 // ── INSTITUIÇÕES (público) ─────────────────────────────────────
 router.get('/instituicoes', instituicaoController.listarAprovadas);
+router.patch('/instituicoes/:id', authMiddleware, async (req, res) => {
+  try {
+    if (!req.usuario || req.usuario.tipo !== 'instituicao' && req.usuario.tipo !== 'admin') {
+      return res.status(403).json({ erro: 'Acesso negado.' });
+    }
+    const { getSupabaseAutenticado } = require('../config/supabase');
+    const client = getSupabaseAutenticado(req.token);
+    const { nome, cnpj, email, telefone, cidade, uf, endereco } = req.body;
+    const { data, error } = await client
+      .from('instituicoes')
+      .update({ nome, cnpj, email, telefone, cidade, uf, endereco })
+      .eq('id', req.params.id)
+      .select();
+    if (error) throw error;
+    res.json({ mensagem: '✅ Dados atualizados!', instituicao: data[0] });
+  } catch (erro) {
+    res.status(400).json({ erro: erro.message });
+  }
+});
 
 // ── PONTOS DE COLETA (público) ─────────────────────────────────
 router.get('/pontos', pontoColetaController.listar);
@@ -36,17 +129,15 @@ router.get('/pontos', pontoColetaController.listar);
 router.post('/presentes/avulso', authMiddleware, presenteController.doarAvulso);
 
 // ── ADMIN — CARTINHAS ──────────────────────────────────────────
-router.patch('/admin/cartinhas/:id/aprovar',   authMiddleware, cartinhaController.aprovar);
-router.patch('/admin/cartinhas/:id/entregar',  authMiddleware, cartinhaController.marcarEntregue);
-// Nova rota: lista TODAS as cartinhas (incluindo aguardando) com join de criança
-router.get  ('/admin/cartinhas',               authMiddleware, async (req, res) => {
+router.patch('/admin/cartinhas/:id/aprovar',  authMiddleware, cartinhaController.aprovar);
+router.patch('/admin/cartinhas/:id/entregar', authMiddleware, cartinhaController.marcarEntregue);
+router.get  ('/admin/cartinhas',              authMiddleware, async (req, res) => {
   try {
     if (!req.usuario || req.usuario.tipo !== 'admin') {
       return res.status(403).json({ erro: 'Acesso negado.' });
     }
     const { getSupabaseAutenticado } = require('../config/supabase');
     const client = getSupabaseAutenticado(req.token);
-    // Join com criancas e categorias para trazer nome e categoria
     const { data, error } = await client
       .from('cartinhas')
       .select(`
@@ -58,7 +149,6 @@ router.get  ('/admin/cartinhas',               authMiddleware, async (req, res) 
       `)
       .order('enviada_em', { ascending: false });
     if (error) throw error;
-    // Formata para o padrão esperado pelo frontend
     const cartinhas = (data || []).map(c => ({
       id:             c.id,
       texto:          c.texto,
@@ -67,25 +157,44 @@ router.get  ('/admin/cartinhas',               authMiddleware, async (req, res) 
       aprovada_em:    c.aprovada_em,
       adotada_em:     c.adotada_em,
       entregue_em:    c.entregue_em,
-      crianca_nome:   c.criancas?.nome        || '—',
+      crianca_nome:   c.criancas?.nome || '—',
       crianca_idade:  c.criancas?.data_nasc
         ? Math.floor((Date.now() - new Date(c.criancas.data_nasc)) / (365.25*24*3600*1000))
         : '?',
       categoria_slug: c.categorias_presente?.slug || '—',
       categoria_nome: c.categorias_presente?.nome || '—',
-      inst_nome:      c.instituicoes?.nome     || '—',
-      doador_nome:    c.doador?.nome           || null,
-      doador_email:   c.doador?.email          || null,
+      inst_nome:      c.instituicoes?.nome        || '—',
+      doador_nome:    c.doador?.nome              || null,
+      doador_email:   c.doador?.email             || null,
     }));
     res.json({ total: cartinhas.length, cartinhas });
   } catch (erro) {
     res.status(500).json({ erro: 'Erro ao listar cartinhas admin', detalhes: erro.message });
   }
 });
+router.patch('/cartinhas/:id/cancelar', authMiddleware, async (req, res) => {
+  try {
+    const { getSupabaseAutenticado } = require('../config/supabase');
+    const client = getSupabaseAutenticado(req.token);
+    const { data, error } = await client
+      .from('cartinhas')
+      .update({ 
+        status: 'disponivel',
+        doador_id: null,
+        adotada_em: null
+      })
+      .eq('id', req.params.id)
+      .select();
+    if (error) throw error;
+    res.json({ mensagem: '✅ Adoção cancelada!', cartinha: data[0] });
+  } catch (erro) {
+    res.status(400).json({ erro: erro.message });
+  }
+});
 
 // ── ADMIN — INSTITUIÇÕES ───────────────────────────────────────
-router.get  ('/admin/instituicoes',             authMiddleware, instituicaoController.listarTodas);
-router.patch('/admin/instituicoes/:id/aprovar', authMiddleware, instituicaoController.aprovar);
+router.get  ('/admin/instituicoes',               authMiddleware, instituicaoController.listarTodas);
+router.patch('/admin/instituicoes/:id/aprovar',   authMiddleware, instituicaoController.aprovar);
 router.patch('/admin/instituicoes/:id/desativar', authMiddleware, async (req, res) => {
   try {
     if (!req.usuario || req.usuario.tipo !== 'admin') {
@@ -112,7 +221,6 @@ router.get('/admin/doadores', authMiddleware, async (req, res) => {
     }
     const { getSupabaseAutenticado } = require('../config/supabase');
     const client = getSupabaseAutenticado(req.token);
-    // Busca todos os usuários do tipo doador com contagem de adoções
     const { data, error } = await client
       .from('usuarios')
       .select('id, nome, email, telefone, cidade, uf, created_at, ativo')
@@ -126,9 +234,8 @@ router.get('/admin/doadores', authMiddleware, async (req, res) => {
 });
 
 // ── ADMIN — PONTOS DE COLETA ───────────────────────────────────
-router.post  ('/admin/pontos',      authMiddleware, pontoColetaController.criar);
-// Editar ponto
-router.patch ('/admin/pontos/:id',  authMiddleware, async (req, res) => {
+router.post  ('/admin/pontos',     authMiddleware, pontoColetaController.criar);
+router.patch ('/admin/pontos/:id', authMiddleware, async (req, res) => {
   try {
     if (!req.usuario || req.usuario.tipo !== 'admin') {
       return res.status(403).json({ erro: 'Acesso negado.' });
@@ -147,7 +254,6 @@ router.patch ('/admin/pontos/:id',  authMiddleware, async (req, res) => {
     res.status(400).json({ erro: erro.message });
   }
 });
-// Desativar ponto (soft-delete via flag ativo=false)
 router.delete('/admin/pontos/:id', authMiddleware, async (req, res) => {
   try {
     if (!req.usuario || req.usuario.tipo !== 'admin') {
@@ -166,8 +272,46 @@ router.delete('/admin/pontos/:id', authMiddleware, async (req, res) => {
   }
 });
 
-// ── ADMIN — PRESENTES AVULSOS ──────────────────────────────────
+// ── ADMIN — PRESENTES (doacoes_diretas) ───────────────────────
 router.get('/admin/presentes/avulsos', authMiddleware, presenteController.listarAvulsos);
+
+router.patch('/admin/presentes/:id', authMiddleware, async (req, res) => {
+  try {
+    if (!req.usuario || req.usuario.tipo !== 'admin') {
+      return res.status(403).json({ erro: 'Acesso negado.' });
+    }
+    const { getSupabaseAutenticado } = require('../config/supabase');
+    const client = getSupabaseAutenticado(req.token);
+    const { status } = req.body;
+    const { data, error } = await client
+      .from('doacoes_diretas')
+      .update({ status })
+      .eq('id', req.params.id)
+      .select();
+    if (error) throw error;
+    res.json({ mensagem: '✅ Status atualizado!', presente: data[0] });
+  } catch (erro) {
+    res.status(400).json({ erro: erro.message });
+  }
+});
+
+router.delete('/admin/presentes/:id', authMiddleware, async (req, res) => {
+  try {
+    if (!req.usuario || req.usuario.tipo !== 'admin') {
+      return res.status(403).json({ erro: 'Acesso negado.' });
+    }
+    const { getSupabaseAutenticado } = require('../config/supabase');
+    const client = getSupabaseAutenticado(req.token);
+    const { error } = await client
+      .from('doacoes_diretas')
+      .delete()
+      .eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ mensagem: 'Presente removido.' });
+  } catch (erro) {
+    res.status(400).json({ erro: erro.message });
+  }
+});
 
 // ── KPIs DE IMPACTO (público) ──────────────────────────────────
 router.get('/impacto', async (req, res) => {
@@ -181,7 +325,7 @@ router.get('/impacto', async (req, res) => {
   }
 });
 
-// ── DISTRIBUIÇÃO POR CATEGORIA — donut (público) ───────────────
+// ── DISTRIBUIÇÃO POR CATEGORIA (público) ───────────────────────
 router.get('/distribuicao', async (req, res) => {
   try {
     const { supabase } = require('../config/supabase');

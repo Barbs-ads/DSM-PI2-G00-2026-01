@@ -18,18 +18,27 @@ module.exports = async function authMiddleware(req, res, next) {
       return res.status(401).json({ erro: 'Token inválido' });
     }
 
-    // Busca inst_id e tipo correto do banco
+    // Busca por auth_id (UUID do Supabase Auth)
     const { data: usuario } = await supabase
       .from('usuarios')
       .select('id, nome, email, tipo, inst_id')
-      .eq('email', decoded.email)
+      .eq('auth_id', decoded.sub)
       .single();
+
+    // Se não achar por auth_id, tenta por email
+    const { data: usuarioEmail } = !usuario ? await supabase
+      .from('usuarios')
+      .select('id, nome, email, tipo, inst_id')
+      .eq('email', decoded.email)
+      .single() : { data: null };
+
+    const u = usuario || usuarioEmail;
 
     req.usuario = {
       id: decoded.sub,
       email: decoded.email,
-      tipo: usuario?.tipo || decoded.user_metadata?.tipo || 'doador',
-      inst_id: usuario?.inst_id || null
+      tipo: u?.tipo || decoded.user_metadata?.tipo || 'doador',
+      inst_id: u?.inst_id || null
     };
 
     next();
