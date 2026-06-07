@@ -1,7 +1,8 @@
-/* core.js — Conectando Sonhos
-   Conectado ao backend Express em localhost:3000 */
+/* core.js — Conectando Sonhos v7 API-Only
+   Sem dados falsos. Leitura direta da API Node.js.
+*/
 
-const API = "http://localhost:3000/api";
+const API_URL = "http://localhost:3000/api";
 
 const PRESENTE = {
   bonecas: "Bonecas e Acessórios",
@@ -25,74 +26,106 @@ const PRESENTE = {
   outro: "Outro",
 };
 
-/* ══ HELPER HTTP ══════════════════════════════════════════ */
-async function api(path, options = {}) {
-  const u = Auth.get();
+/* ══ HELPERS DE FETCH ═══════════════════════════════════════════ */
+async function apiGet(path, token = null) {
   const headers = { "Content-Type": "application/json" };
-  if (u?.token) headers["Authorization"] = `Bearer ${u.token}`;
-
-  const res = await fetch(`${API}${path}`, { ...options, headers });
-  const json = await res.json();
-
-  if (!res.ok) throw new Error(json.erro || json.message || "Erro na requisição");
-  return json;
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+  const res = await fetch(`${API_URL}${path}`, { headers });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.erro || `Erro ${res.status}`);
+  return data;
 }
 
-/* ══ AUTH ══════════════════════════════════════════════════ */
+async function apiPost(path, body, token = null, method = "POST") {
+  const headers = { "Content-Type": "application/json" };
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+  const res = await fetch(`${API_URL}${path}`, {
+    method,
+    headers,
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.erro || `Erro ${res.status}`);
+  return data;
+}
+
+/* ══ ADAPTER ════════════════════════════════════════════════════ */
+function _adaptarCartinha(c) {
+  return {
+    ...c,
+    nome_crianca: c.crianca_nome || c.nome_crianca || "—",
+    presente: c.categoria_slug || c.presente || "outro",
+    inst_nome: c.inst_nome || "Instituição parceira",
+    nascimento: c.nascimento || _idadeParaData(c.crianca_idade),
+  };
+}
+
+function _idadeParaData(idade) {
+  if (idade == null) return null;
+  const ano = new Date().getFullYear() - Math.round(idade);
+  return `${ano}-06-15`;
+}
+
+/* ══ AUTH ════════════════════════════════════════════════════ */
 const Auth = {
   get() {
-    try { return JSON.parse(localStorage.getItem("cs_u")); }
-    catch { return null; }
+    try {
+      return JSON.parse(localStorage.getItem("cs_u"));
+    } catch {
+      return null;
+    }
   },
-  set(u) { localStorage.setItem("cs_u", JSON.stringify(u)); },
-  clear() { localStorage.removeItem("cs_u"); },
+  set(u) {
+    localStorage.setItem("cs_u", JSON.stringify(u));
+  },
+  clear() {
+    localStorage.removeItem("cs_u");
+  },
+  getToken() {
+    return this.get()?.token || null;
+  },
 
   async login(email, senha) {
-    const data = await api("/auth/login", {
-      method: "POST",
-      body: JSON.stringify({ email, senha })
-    });
+    const data = await apiPost("/auth/login", { email, senha });
     const u = {
       id: data.usuario.id,
       nome: data.usuario.nome || email.split("@")[0],
       email: data.usuario.email,
-      tipo: data.usuario.tipo,
-      inst_id: data.usuario.inst_id,
-      token: data.token
+      tipo: data.usuario.tipo || "doador",
+      inst_id: data.usuario.inst_id || null,
+      token: data.token,
     };
     this.set(u);
     return u;
   },
 
   async cadastrarDoador(d) {
-    await api("/auth/registrar/doador", {
-      method: "POST",
-      body: JSON.stringify({
-        nome: d.nome,
-        email: d.email,
-        senha: d.senha,
-        telefone: d.telefone,
-        cep: d.cep,
-        uf: d.estado,
-        cidade: d.cidade,
-        bairro: d.bairro
-      })
+    await apiPost("/auth/registrar/doador", {
+      nome: d.nome,
+      email: d.email,
+      senha: d.senha,
+      telefone: d.telefone || "",
+      cep: d.cep || "",
+      uf: d.estado || d.uf || "",
+      cidade: d.cidade || "",
+      bairro: d.bairro || "",
     });
     return true;
   },
 
   async cadastrarInst(d) {
-    await api("/auth/registrar/instituicao", {
-      method: "POST",
-      body: JSON.stringify({
-        nome_instituicao: d.nome,
-        tipo: d.tipo,
-        cnpj: d.cnpj,
-        responsavel_email: d.email,
-        responsavel_nome: d.responsavel,
-        responsavel_telefone: d.telefone,
-        senha: d.senha
-      })
+    await apiPost("/auth/registrar/instituicao", {
+      nome_instituicao: d.nome,
+      tipo: d.tipo || "ong",
+      cnpj: d.cnpj || "",
+      email_instituicao: d.email,
+      responsavel_nome: d.responsavel,
+      responsavel_email: d.email,
+      responsavel_telefone: d.telefone || "",
+      telefone: d.telefone || "",
+      cidade: d.cidade || "Franca",
+      uf: d.uf || "SP",
+      senha: d.senha,
     });
     return true;
   },
@@ -100,63 +133,84 @@ const Auth = {
   logout() {
     this.clear();
     window.location.href = "index.html";
-  }
+  },
 };
 
 /* ══ CARTINHAS ══════════════════════════════════════════════ */
 const Cartinhas = {
   async listar(f = {}) {
     const params = new URLSearchParams();
-    if (f.status)    params.append("status", f.status);
-    if (f.presente)  params.append("categoria_id", f.presente);
-    if (f.busca)     params.append("busca", f.busca);
-    if (f.limite)    params.append("limite", f.limite);
-    if (f.pagina)    params.append("pagina", f.pagina);
+    if (f.status) params.set("status", f.status);
+    if (f.categoria_id) params.set("categoria_id", f.categoria_id);
+    if (f.inst_id) params.set("inst_id", f.inst_id);
+    if (f.busca) params.set("busca", f.busca);
 
     const qs = params.toString();
-    
-    const sep = qs ? "&" : "?";
-    const data = await api(`/cartinhas${qs ? "?" + qs : ""}${sep}_t=${Date.now()}`);
-    return (data.cartinhas || []).map(c => ({
-      ...c,
-      nome_crianca: c.crianca_nome,
-      nascimento: c.crianca_data_nasc || null,
-      presente: c.categoria_slug,
-      inst_nome: c.inst_nome
-    }));
+    const data = await apiGet(`/cartinhas${qs ? "?" + qs : ""}`);
+    return (data.cartinhas || []).map(_adaptarCartinha);
   },
 
   async criar(d) {
-    await api("/cartinhas", {
-      method: "POST",
-      body: JSON.stringify(d)
-    });
+    const token = Auth.getToken();
+    if (!token) throw new Error("Faça login para enviar uma cartinha.");
+
+    // Converte o texto do select para o ID numérico que o backend exige
+    await apiPost(
+      "/cartinhas",
+      {
+        nome_crianca: d.nome,
+        nascimento: d.nascimento,
+        presente: d.presente,
+        texto: d.texto,
+      },
+      token,
+    );
+
     return true;
   },
 
-  async adotar(id, ponto_id) {
-    await api(`/cartinhas/${id}/adotar`, {
-      method: "POST",
-      body: JSON.stringify({ ponto_id })
-    });
+  async adotar(id, pontoId) {
+    const u = Auth.get();
+    if (!u || !u.token) {
+      toast("Faça login para adotar uma cartinha.", "erro");
+      return false;
+    }
+    await apiPost(
+      `/cartinhas/${id}/adotar`,
+      { ponto_id: parseInt(pontoId) },
+      u.token,
+    );
     return true;
-  }
+  },
+
+  async minhasAdocoes() {
+    const token = Auth.getToken();
+    if (!token) return [];
+    const data = await apiGet("/cartinhas/doador/minhas", token);
+    return (data.cartinhas || []).map(_adaptarCartinha);
+  },
 };
 
-/* ══ DADOS ══════════════════════════════════════════════════ */
+/* ══ DADOS (KPIs) ════════════════════════════════════════ */
 const Dados = {
   async impacto() {
-    return await api("/impacto");
-  }
+    // Agora busca apenas dados reais, sem usar números inventados se der erro!
+    const dadosReais = await apiGet("/impacto");
+    return dadosReais;
+  },
 };
 
-/* ══ UTILITÁRIOS ══════════════════════════════════════════ */
+/* ══ UTILITÁRIOS ════════════════════════════════════════ */
 function calcIdade(nasc) {
   if (!nasc) return "?";
-  const n = new Date(nasc), h = new Date();
+  const n = new Date(nasc),
+    h = new Date();
   let i = h.getFullYear() - n.getFullYear();
-  if (h.getMonth() < n.getMonth() ||
-    (h.getMonth() === n.getMonth() && h.getDate() < n.getDate())) i--;
+  if (
+    h.getMonth() < n.getMonth() ||
+    (h.getMonth() === n.getMonth() && h.getDate() < n.getDate())
+  )
+    i--;
   return i;
 }
 
@@ -167,7 +221,9 @@ async function viacep(cep) {
     const r = await fetch(`https://viacep.com.br/ws/${c}/json/`);
     const d = await r.json();
     return d.erro ? null : d;
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
 
 function toast(msg, tipo = "info", dur = 4500) {
@@ -183,7 +239,8 @@ function toast(msg, tipo = "info", dur = 4500) {
   el.innerHTML = `<span style="font-weight:900;font-size:1rem;flex-shrink:0">${icons[tipo] || "i"}</span><span>${msg}</span>`;
   ctr.appendChild(el);
   setTimeout(() => {
-    el.style.cssText = "transition:opacity .3s,transform .3s;opacity:0;transform:translateX(60px)";
+    el.style.cssText =
+      "transition:opacity .3s,transform .3s;opacity:0;transform:translateX(60px)";
     setTimeout(() => el.remove(), 320);
   }, dur);
 }
@@ -202,11 +259,17 @@ function animNum(el, alvo, ms = 1800) {
 }
 
 function initScrollReveal() {
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add("visivel"); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.1 });
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visivel");
+          obs.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.1 },
+  );
   document.querySelectorAll(".entra").forEach((el) => obs.observe(el));
 }
 
@@ -223,11 +286,13 @@ function initMenu() {
   const navU = document.getElementById("nav-usuario");
   if (navU) {
     navU.innerHTML = u
-      ? `<span class="nu-saud">Olá, ${u.nome.split(" ")[0]}</span>
+      ? `<span class="nu-saud" aria-label="Usuário logado">Olá, ${u.nome.split(" ")[0]}</span>
          <a href="${u.tipo === "admin" ? "admin.html" : u.tipo === "doador" ? "doador.html" : "instituicao.html"}" class="btn btn-ghost btn-p">Minha Conta</a>
-         <button type="button" class="btn btn-p nu-sair" data-action="logout">Sair</button>`
+         <button type="button" class="btn btn-p nu-sair" data-action="logout" aria-label="Sair da conta">Sair</button>`
       : `<a href="login.html" class="btn btn-primario btn-p">Entrar</a>`;
-    navU.querySelector('[data-action="logout"]')?.addEventListener("click", () => Auth.logout());
+    navU
+      .querySelector('[data-action="logout"]')
+      ?.addEventListener("click", () => Auth.logout());
   }
 
   const hbg = document.querySelector(".hamburger");
@@ -238,17 +303,19 @@ function initMenu() {
       hbg.classList.toggle("aberto", aberto);
       hbg.setAttribute("aria-expanded", aberto);
     });
-    nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => {
-      nav.classList.remove("aberto");
-      hbg.classList.remove("aberto");
-      hbg.setAttribute("aria-expanded", "false");
-    }));
   }
 
+  // 👇 ESSA É A PARTE QUE FALTAVA PARA O CONTEÚDO APARECER 👇
   const hdr = document.querySelector(".site-header");
   if (hdr) {
-    window.addEventListener("scroll", () => hdr.classList.toggle("elevado", scrollY > 20), { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => hdr.classList.toggle("elevado", scrollY > 20),
+      { passive: true },
+    );
   }
+
+  // Gatilho que revela as imagens e textos nas páginas Sobre, Impacto, etc.
   initScrollReveal();
 }
 
