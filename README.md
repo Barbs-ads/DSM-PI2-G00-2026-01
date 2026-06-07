@@ -239,7 +239,7 @@ Abra qualquer `.html` da pasta `frontend/` diretamente no navegador, ou use uma 
 
 ## 👨‍💻 Equipe — Grupo QuadCore
 
-Projeto desenvolvido para a disciplina **PI2 — Projeto Integrador II** do curso de **Desenvolvimento de Software Multiplataforma (DSM)** da **Fatec**.
+Projeto desenvolvido pelos integrantes: Barbara Alves, Fernando Gomes, Kailany Bughi e Leonardo Pessoa  — Projeto Integrador II** do curso de **Desenvolvimento de Software Multiplataforma (DSM)** da **Fatec**.
 
 ---
 
