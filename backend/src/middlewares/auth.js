@@ -1,52 +1,58 @@
-const { supabase } = require('../config/supabase');
+// Middleware: Validar Token JWT
+const { getSupabaseAutenticado } = require("../config/supabase");
 
 module.exports = async function authMiddleware(req, res, next) {
   try {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
-        erro: 'Token não fornecido ou mal formatado'
+        erro: "Token não fornecido ou mal formatado",
+        esperado: "Authorization: Bearer SEU_TOKEN_AQUI",
       });
     }
 
-    req.token = authHeader.split(' ')[1];
+    req.token = authHeader.split(" ")[1];
 
-    const decoded = require('jsonwebtoken').decode(req.token);
+    const decoded = require("jsonwebtoken").decode(req.token);
 
     if (!decoded) {
-      return res.status(401).json({ erro: 'Token inválido' });
+      return res.status(401).json({
+        erro: "Token inválido",
+      });
     }
 
-    // Busca por auth_id (UUID do Supabase Auth)
-    const { data: usuario } = await supabase
-      .from('usuarios')
-      .select('id, nome, email, tipo, inst_id')
-      .eq('auth_id', decoded.sub)
+    const clientLogado = getSupabaseAutenticado(req.token);
+
+    const { data: usuarioBanco, error } = await clientLogado
+      .from("usuarios")
+      .select("id, tipo, inst_id")
+      .eq("auth_id", decoded.sub)
       .single();
 
-    // Se não achar por auth_id, tenta por email
-    const { data: usuarioEmail } = !usuario ? await supabase
-      .from('usuarios')
-      .select('id, nome, email, tipo, inst_id')
-      .eq('email', decoded.email)
-      .single() : { data: null };
-
-    const u = usuario || usuarioEmail;
+    if (error || !usuarioBanco) {
+      return res.status(401).json({
+        erro: "Usuário não encontrado no banco de dados.",
+        detalhes: error ? error.message : "Nenhum registro com este auth_id.",
+      });
+    }
 
     req.usuario = {
-      id: decoded.sub,
+      id: usuarioBanco.id,
+      auth_id: decoded.sub,
       email: decoded.email,
-      tipo: u?.tipo || decoded.user_metadata?.tipo || 'doador',
-      inst_id: u?.inst_id || null
+      tipo: usuarioBanco.tipo,
+      inst_id: usuarioBanco.inst_id || null,
     };
 
-    next();
+    console.log("TIPO REAL:", req.usuario.tipo);
+    console.log("USER:", req.usuario);
 
+    next();
   } catch (erro) {
-    return res.status(401).json({
-      erro: 'Erro ao processar token',
-      detalhes: erro.message
+    return res.status(500).json({
+      erro: "Erro interno ao processar token e buscar usuário",
+      detalhes: erro.message,
     });
   }
 };
