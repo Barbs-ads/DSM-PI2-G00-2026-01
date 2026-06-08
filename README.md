@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src="frontend/logotipo/logo.png" alt="Conectando Sonhos" width="120"/>
-
 # Conectando Sonhos 🎁
 
 **Uma plataforma que transforma cartinhas de crianças em presentes reais.**  
