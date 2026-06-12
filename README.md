@@ -20,6 +20,8 @@ Inspirado nas cartinhas ao Papai Noel, o **Conectando Sonhos** conecta crianças
 
 > 🎄 Cada cartinha representa uma criança real. Cada doação, um sonho realizado.
 
+[Link do Youtube com a demonstração do projeto](https://youtu.be/_ErYe5zLqsI?si=AF_MXKn2p8o8B-jW)
+
 ---
 
 ## 🖥️ Páginas do Sistema
